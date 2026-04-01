@@ -2,14 +2,14 @@
 
 import { useState, useEffect, useRef } from "react";
 
-// âââ META PIXEL HELPER ââââââââââââââââââââââââââââââââââââââââ
+// ─── META PIXEL HELPER ────────────────────────────────────────
 function fireInitiateCheckout() {
   if (typeof window !== "undefined" && window.fbq) {
     window.fbq("track", "InitiateCheckout");
   }
 }
 
-// âââ TOKENS âââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── TOKENS ───────────────────────────────────────────────────
 const gold        = "#C9A84C";
 const goldLight   = "#D4B85C";
 const goldDim     = "rgba(201,168,76,0.12)";
@@ -22,7 +22,7 @@ const textMuted   = "#8A8680";
 const border      = "#1E1E1E";
 const borderGold  = "rgba(201,168,76,0.25)";
 
-// âââ BEAMS BACKGROUND ââââââââââââââââââââââââââââââââââââââââ
+// ─── BEAMS BACKGROUND ────────────────────────────────────────
 function BeamsHero({ children }) {
   const canvasRef = useRef(null);
   const beamsRef  = useRef([]);
@@ -38,7 +38,7 @@ function BeamsHero({ children }) {
       return {
         x:          Math.random() * w * 1.6 - w * 0.3,
         y:          Math.random() * h * 1.5 - h * 0.25,
-        // wide blobs like the reference â 120 to 280px
+        // wide blobs like the reference — 120 to 280px
         width:      120 + Math.random() * 160,
         length:     h * 3,
         angle,
@@ -46,7 +46,7 @@ function BeamsHero({ children }) {
         speed:      0.18 + Math.random() * 0.32,
         // hue: deep gold 40 to warm amber 52
         hue:        40 + Math.random() * 12,
-        // high opacity â this is the key fix
+        // high opacity — this is the key fix
         opacity:    0.28 + Math.random() * 0.32,
         pulse:      Math.random() * Math.PI * 2,
         pulseSpeed: 0.012 + Math.random() * 0.018,
@@ -119,7 +119,7 @@ function BeamsHero({ children }) {
 
   return (
     <>
-      {/* Fixed canvas â covers the entire page at all scroll positions */}
+      {/* Fixed canvas — covers the entire page at all scroll positions */}
       <canvas
         ref={canvasRef}
         style={{
@@ -132,7 +132,7 @@ function BeamsHero({ children }) {
           zIndex: 0,
         }}
       />
-      {/* dark veil â damps the beams so text is always readable */}
+      {/* dark veil — damps the beams so text is always readable */}
       <div style={{
         position: "fixed",
         inset: 0,
@@ -148,7 +148,7 @@ function BeamsHero({ children }) {
   );
 }
 
-// âââ SVG ICONS ââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── SVG ICONS ────────────────────────────────────────────────
 // Diente con tornillo (implante)
 const IconImplant = () => (
   <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke={gold} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
@@ -177,7 +177,7 @@ const IconVeneer = () => (
 // Alineador tipo Invisalign
 const IconAligner = () => (
   <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke={gold} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-    {/* forma de alineador/fÃ©rula */}
+    {/* forma de alineador/férula */}
     <path d="M4 12c0-2 1.5-3 3-3h18c1.5 0 3 1 3 3v3c0 5-3 9-12 9S4 20 4 15v-3z"/>
     {/* dientes internos indicados */}
     <line x1="10" y1="9" x2="10" y2="14"/>
@@ -187,21 +187,21 @@ const IconAligner = () => (
   </svg>
 );
 
-// NiÃ±o (silueta simple)
+// Niño (silueta simple)
 const IconChild = () => (
   <svg width="28" height="28" viewBox="0 0 32 32" fill="none" stroke={gold} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="16" cy="7" r="4"/>
-    {/* cuerpo mÃ¡s pequeÃ±o/proporciones infantiles */}
+    {/* cuerpo más pequeño/proporciones infantiles */}
     <path d="M10 14c0-2 2-3 6-3s6 1 6 3v6H10v-6z"/>
     <line x1="10" y1="20" x2="9" y2="28"/>
     <line x1="22" y1="20" x2="23" y2="28"/>
-    {/* brazos abiertos (niÃ±o) */}
+    {/* brazos abiertos (niño) */}
     <line x1="10" y1="15" x2="5" y2="19"/>
     <line x1="22" y1="15" x2="27" y2="19"/>
   </svg>
 );
 
-// Icons para "QuÃ© hacemos"
+// Icons para "Qué hacemos"
 const IconAds = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
     <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
@@ -233,7 +233,7 @@ const IconSync = () => (
   </svg>
 );
 
-// âââ DATA âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── DATA ─────────────────────────────────────────────────────
 const treatments = [
   {
     name: "Implantes",
@@ -247,24 +247,24 @@ const treatments = [
   },
   {
     name: "Ortodoncia tradicional e invisible",
-    desc: "Adultos con poder adquisitivo que quieren discreciÃ³n",
+    desc: "Adultos con poder adquisitivo que quieren discreción",
     Icon: IconAligner,
   },
   {
     name: "Ortodoncia infantil",
-    desc: "Los papÃ¡s que cuidan a sus hijos pagan sin dudar",
+    desc: "Los papás que cuidan a sus hijos pagan sin dudar",
     Icon: IconChild,
   },
 ];
 
 const clients = [
-  { name: "ClÃ­nica Ãs",          loc: "Providencia, Santiago" },
-  { name: "Dental Plaza",         loc: "CopiapÃ³" },
+  { name: "Clínica És",          loc: "Providencia, Santiago" },
+  { name: "Dental Plaza",         loc: "Copiapó" },
   { name: "Tus Odontopediatras",  loc: "San Fernando" },
   { name: "Excelli",              loc: "Garanhuns, Brasil" },
-  { name: "ClÃ­nica Fetaluwn",     loc: "Providencia, Santiago" },
-  { name: "Dr. HÃ©ctor YaÃ±ez",     loc: "Santiago" },
-  { name: "Dentilife",            loc: "ReÃ±aca" },
+  { name: "Clínica Fetaluwn",     loc: "Providencia, Santiago" },
+  { name: "Dr. Héctor Yañez",     loc: "Santiago" },
+  { name: "Dentilife",            loc: "Reñaca" },
 ];
 
 const painPoints = [
@@ -273,11 +273,11 @@ const painPoints = [
     svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.29-1.29a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>,
   },
   {
-    text: "No sÃ© cuÃ¡ntos pacientes nuevos llegaron este mes ni por quÃ© canal",
+    text: "No sé cuántos pacientes nuevos llegaron este mes ni por qué canal",
     svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
   },
   {
-    text: "He pagado por marketing y solo recibÃ­ reportes de likes e impresiones",
+    text: "He pagado por marketing y solo recibí reportes de likes e impresiones",
     svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
   },
   {
@@ -285,33 +285,33 @@ const painPoints = [
     svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>,
   },
   {
-    text: "No puedo tomarme vacaciones sin que la agenda se vacÃ­e",
+    text: "No puedo tomarme vacaciones sin que la agenda se vacíe",
     svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>,
   },
   {
-    text: "Trabajo mÃ¡s de 10 horas diarias y la clÃ­nica sigue dependiendo de mÃ­",
+    text: "Trabajo más de 10 horas diarias y la clínica sigue dependiendo de mí",
     svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
   },
 ];
 
 const timelineSteps = [
-  { day: "DÃ­a 0",        title: "DiagnÃ³stico gratuito",    desc: "Analizamos tu captaciÃ³n actual y diseÃ±amos tu sistema personalizado. 45 minutos que te van a abrir los ojos." },
-  { day: "DÃ­as 1 al 7",  title: "ConfiguraciÃ³n del sistema", desc: "Bot de IA con mÃ©todos AIDA y SPIN, CRM, pipeline completo, integraciÃ³n con Dentalink. Todo queda funcionando." },
-  { day: "DÃ­as 7 al 14", title: "CampaÃ±a activa",          desc: "CampaÃ±as de Meta Ads lanzadas con guiones probados para tu tratamiento. Los primeros leads empiezan a llegar." },
-  { day: "DÃ­as 15 al 30",title: "Primeros resultados",     desc: "Pacientes calificados agendando en tu Dentalink de forma automÃ¡tica. TÃº solo operas." },
+  { day: "Día 0",        title: "Diagnóstico gratuito",    desc: "Analizamos tu captación actual y diseñamos tu sistema personalizado. 45 minutos que te van a abrir los ojos." },
+  { day: "Días 1 al 7",  title: "Configuración del sistema", desc: "Bot de IA con métodos AIDA y SPIN, CRM, pipeline completo, integración con Dentalink. Todo queda funcionando." },
+  { day: "Días 7 al 14", title: "Campaña activa",          desc: "Campañas de Meta Ads lanzadas con guiones probados para tu tratamiento. Los primeros leads empiezan a llegar." },
+  { day: "Días 15 al 30",title: "Primeros resultados",     desc: "Pacientes calificados agendando en tu Dentalink de forma automática. Tú solo operas." },
 ];
 
 const stackItems = [
-  { name: "CampaÃ±as Meta Ads",                  desc: "DiseÃ±adas exclusivamente para odontologÃ­a de alto ticket. Sin mÃ©tricas de vanidad." },
-  { name: "Bot de IA en WhatsApp 24/7",          desc: "Entrenado con mÃ©todos de venta AIDA y SPIN. Responde, califica y agenda solo." },
+  { name: "Campañas Meta Ads",                  desc: "Diseñadas exclusivamente para odontología de alto ticket. Sin métricas de vanidad." },
+  { name: "Bot de IA en WhatsApp 24/7",          desc: "Entrenado con métodos de venta AIDA y SPIN. Responde, califica y agenda solo." },
   { name: "El mejor CRM del mercado y Pipeline", desc: "Tu flujo de pacientes organizado desde el primer contacto hasta la silla." },
-  { name: "SincronizaciÃ³n con Dentalink",        desc: "Las citas aparecen directo en tu agenda. Si no tienes agenda digital, te la instalamos. PregÃºntanos por compatibilidad con otras plataformas." },
-  { name: "4 guiones de anuncios Venus por mes", desc: "Scripts de anuncios con estructura probada. TÃº solo grabas." },
-  { name: "Protocolo de ConversiÃ³n Venus",       desc: "Entrenamiento de ventas para dentista en silla y guiÃ³n de ventas para tu recepcionista." },
-  { name: "Dashboard Venus",                     desc: "MÃ©tricas en tiempo real. CuÃ¡ntos leads, cuÃ¡ntas conversaciones, cuÃ¡ntas citas. Sin PDFs inÃºtiles." },
+  { name: "Sincronización con Dentalink",        desc: "Las citas aparecen directo en tu agenda. Si no tienes agenda digital, te la instalamos. Pregúntanos por compatibilidad con otras plataformas." },
+  { name: "4 guiones de anuncios Venus por mes", desc: "Scripts de anuncios con estructura probada. Tú solo grabas." },
+  { name: "Protocolo de Conversión Venus",       desc: "Entrenamiento de ventas para dentista en silla y guión de ventas para tu recepcionista." },
+  { name: "Dashboard Venus",                     desc: "Métricas en tiempo real. Cuántos leads, cuántas conversaciones, cuántas citas. Sin PDFs inútiles." },
 ];
 
-// âââ HOOKS ââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── HOOKS ────────────────────────────────────────────────────
 function useInView(ref, threshold = 0.1) {
   const [v, setV] = useState(false);
   useEffect(() => {
@@ -336,7 +336,7 @@ function useScrollY() {
   return y;
 }
 
-// âââ ANIMATED ITEM (stagger child) ââââââââââââââââââââââââââââ
+// ─── ANIMATED ITEM (stagger child) ────────────────────────────
 function FadeItem({ children, delay = 0, style }) {
   const r = useRef();
   const v = useInView(r, 0.08);
@@ -355,7 +355,7 @@ function FadeItem({ children, delay = 0, style }) {
   );
 }
 
-// âââ PRIMITIVES âââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── PRIMITIVES ───────────────────────────────────────────────
 function Section({ children, style, id }) {
   const r = useRef();
   const v = useInView(r);
@@ -409,7 +409,7 @@ function Divider() {
   return <div style={{ maxWidth: 920, margin: "0 auto", borderTop: `1px solid ${border}` }} />;
 }
 
-// âââ GLASS SVG FILTER (rendered once, reused by all buttons) ââ
+// ─── GLASS SVG FILTER (rendered once, reused by all buttons) ──
 function GlassFilterDef() {
   return (
     <svg style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}>
@@ -426,7 +426,7 @@ function GlassFilterDef() {
   );
 }
 
-// âââ LIQUID GLASS BUTTON ââââââââââââââââââââââââââââââââââââââ
+// ─── LIQUID GLASS BUTTON ──────────────────────────────────────
 function Btn({ children, onClick, style }) {
   const [pressed, setPressed] = useState(false);
   const [hovered, setHovered] = useState(false);
@@ -464,7 +464,7 @@ function Btn({ children, onClick, style }) {
         ...style,
       }}
     >
-      {/* backdrop glass layer â the distortion lives here */}
+      {/* backdrop glass layer — the distortion lives here */}
       <span style={{
         position: "absolute",
         inset: 0,
@@ -473,13 +473,13 @@ function Btn({ children, onClick, style }) {
         WebkitBackdropFilter: 'url("#liquid-glass") blur(2px) brightness(1.08)',
         zIndex: -1,
       }} />
-      {/* glass surface â outer ring + inner highlight */}
+      {/* glass surface — outer ring + inner highlight */}
       <span style={{
         position: "absolute",
         inset: 0,
         borderRadius: 100,
         boxShadow: [
-          // outer rim â gold tinted
+          // outer rim — gold tinted
           `0 0 0 1px rgba(201,168,76,0.55)`,
           // inner top highlight
           `inset 0 1px 1px rgba(255,255,255,0.22)`,
@@ -493,7 +493,7 @@ function Btn({ children, onClick, style }) {
         transition: "box-shadow 0.25s ease, background 0.25s ease",
         zIndex: -1,
       }} />
-      {/* text â sits above the glass */}
+      {/* text — sits above the glass */}
       <span style={{ position: "relative", zIndex: 1 }}>
         {children}
       </span>
@@ -510,7 +510,7 @@ function CheckIcon() {
   );
 }
 
-// âââ FLOATING CTA âââââââââââââââââââââââââââââââââââââââââââââ
+// ─── FLOATING CTA ─────────────────────────────────────────────
 function FloatingCTA({ onClick }) {
   const scrollY = useScrollY();
   const visible = scrollY > 500;
@@ -572,12 +572,12 @@ function FloatingCTA({ onClick }) {
         background: "linear-gradient(160deg, rgba(255,255,255,0.1) 0%, rgba(201,168,76,0.08) 50%, rgba(255,255,255,0.04) 100%)",
         zIndex: -1,
       }} />
-      <span style={{ position: "relative", zIndex: 1 }}>Agendar diagnÃ³stico</span>
+      <span style={{ position: "relative", zIndex: 1 }}>Agendar diagnóstico</span>
     </button>
   );
 }
 
-// âââ CHECKLIST ââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── CHECKLIST ────────────────────────────────────────────────
 function Checklist() {
   const [checked, setChecked] = useState(new Set());
   const toggle = i => {
@@ -651,23 +651,23 @@ function Checklist() {
         transition: "all 0.45s ease",
       }}>
         <p style={{ fontSize: 16, fontWeight: 600, color: "#e05555", marginBottom: 12, fontFamily: "'Outfit', sans-serif" }}>
-          Tu clÃ­nica estÃ¡ perdiendo pacientes ahora mismo.
+          Tu clínica está perdiendo pacientes ahora mismo.
         </p>
         <p style={{ fontSize: 15, color: "#B0ACA8", lineHeight: 1.7, margin: "0 0 12px", fontFamily: "'DM Sans', sans-serif" }}>
-          Cada punto que marcaste es facturaciÃ³n que se estÃ¡ yendo a tu competencia. Sin un sistema de captaciÃ³n profesional, estos problemas no se resuelven solos. Se acumulan.
+          Cada punto que marcaste es facturación que se está yendo a tu competencia. Sin un sistema de captación profesional, estos problemas no se resuelven solos. Se acumulan.
         </p>
         <p style={{ fontSize: 15, color: textPrimary, lineHeight: 1.7, margin: "0 0 20px", fontFamily: "'DM Sans', sans-serif" }}>
-          El <strong style={{ color: gold }}>Motor de Agenda 14/30</strong> resuelve esto en 14 dÃ­as. Con garantÃ­a: <strong>10 citas confirmadas en tu Dentalink en 30 dÃ­as o no pagas el segundo mes.</strong>
+          El <strong style={{ color: gold }}>Motor de Agenda 14/30</strong> resuelve esto en 14 días. Con garantía: <strong>10 citas confirmadas en tu Dentalink en 30 días o no pagas el segundo mes.</strong>
         </p>
         <Btn onClick={() => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" })} style={{ width: "100%" }}>
-          Agenda tu diagnÃ³stico gratuito
+          Agenda tu diagnóstico gratuito
         </Btn>
       </div>
     </div>
   );
 }
 
-// âââ TIMELINE âââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── TIMELINE ─────────────────────────────────────────────────
 function Timeline() {
   const [active, setActive] = useState(0);
   return (
@@ -711,7 +711,7 @@ function Timeline() {
   );
 }
 
-// âââ COUNTER ââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── COUNTER ──────────────────────────────────────────────────
 function Counter({ target, prefix }) {
   const r = useRef();
   const v = useInView(r);
@@ -730,7 +730,7 @@ function Counter({ target, prefix }) {
   );
 }
 
-// âââ MAIN âââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── MAIN ─────────────────────────────────────────────────────
 export default function VenusLanding() {
   const scrollTo = () => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" });
 
@@ -781,10 +781,10 @@ export default function VenusLanding() {
       {/* FAB */}
       <FloatingCTA onClick={scrollTo} />
 
-      {/* ââ BEAMS â cubre toda la pÃ¡gina âââââââââââââââââââââ */}
+      {/* ══ BEAMS — cubre toda la página ═════════════════════ */}
       <BeamsHero>
 
-      {/* ââ NAV ââââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ NAV ══════════════════════════════════════════════ */}
       <nav style={{
         display: "flex", justifyContent: "space-between", alignItems: "center",
         padding: "24px 32px", maxWidth: 960, margin: "0 auto",
@@ -795,11 +795,11 @@ export default function VenusLanding() {
           VENUS <span style={{ color: gold }}>PERFORMANCE</span>
         </span>
         <Btn onClick={scrollTo} style={{ padding: "11px 26px", fontSize: 13 }}>
-          Agendar diagnÃ³stico
+          Agendar diagnóstico
         </Btn>
       </nav>
 
-      {/* ââ HERO âââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ HERO ═════════════════════════════════════════════ */}
       <section style={{ padding: "120px 24px 100px", maxWidth: 920, margin: "0 auto" }}>
         <div style={{ animation: "fadeSlideUp 0.6s ease 0.1s both" }}>
           <div style={{
@@ -808,7 +808,7 @@ export default function VenusLanding() {
           }}>
             <div style={{ width: 5, height: 5, borderRadius: "50%", background: gold, animation: "pulseGold 2.5s ease infinite" }} />
             <span style={{ fontSize: 11, color: gold, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif" }}>
-              Solo para clÃ­nicas dentales
+              Solo para clínicas dentales
             </span>
           </div>
         </div>
@@ -822,22 +822,22 @@ export default function VenusLanding() {
           }}>
             Un buen dentista no piensa en marketing.{" "}
             <span style={{ color: gold }}>
-              Tiene un sistema que piensa por Ã©l.
+              Tiene un sistema que piensa por él.
             </span>
           </h1>
         </div>
 
         <div style={{ animation: "fadeSlideUp 0.65s ease 0.32s both" }}>
           <p style={{ fontSize: 17, color: textSecondary, maxWidth: 520, marginBottom: 10, lineHeight: 1.65 }}>
-            Instalamos el Motor de Agenda 14/30 en tu clÃ­nica. Tu agenda se llena de pacientes de alto ticket. TÃº no tocas el marketing.
+            Instalamos el Motor de Agenda 14/30 en tu clínica. Tu agenda se llena de pacientes de alto ticket. Tú no tocas el marketing.
           </p>
           <p style={{ fontSize: 14, color: textMuted, maxWidth: 440, marginBottom: 48, lineHeight: 1.5 }}>
-            14 dÃ­as de instalaciÃ³n. Resultados garantizados en 30.
+            14 días de instalación. Resultados garantizados en 30.
           </p>
         </div>
 
         <div style={{ animation: "fadeSlideUp 0.65s ease 0.42s both" }}>
-          {/* VSL â Wistia */}
+          {/* VSL — Wistia */}
           <div style={{
             maxWidth: 680, marginBottom: 48,
             position: "relative",
@@ -859,27 +859,27 @@ export default function VenusLanding() {
 
         <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", animation: "fadeSlideUp 0.65s ease 0.5s both" }}>
           <Btn onClick={scrollTo} style={{ fontSize: 15, padding: "16px 44px" }}>
-            Agenda tu diagnÃ³stico gratuito
+            Agenda tu diagnóstico gratuito
           </Btn>
           <p style={{ fontSize: 13, color: textMuted }}>45 minutos. Sin compromiso. Sin costo.</p>
         </div>
       </section>
 
-      {/* ââ QUÃ HACEMOS ââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ QUÉ HACEMOS ══════════════════════════════════════ */}
       <Section>
-        <Label text="QuÃ© hacemos" />
+        <Label text="Qué hacemos" />
         <GoldRule />
         <h2 style={{ fontSize: "clamp(26px, 3.5vw, 38px)", fontWeight: 600, marginBottom: 20, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
           No somos una agencia que "te hace los ads"
         </h2>
         <p style={{ fontSize: 16, color: textSecondary, lineHeight: 1.7, marginBottom: 10, maxWidth: 600 }}>
-          Te instalamos un sistema completo de captaciÃ³n de pacientes que funciona mientras tÃº operas. Se llama <strong style={{ color: gold }}>Motor de Agenda 14/30</strong>.
+          Te instalamos un sistema completo de captación de pacientes que funciona mientras tú operas. Se llama <strong style={{ color: gold }}>Motor de Agenda 14/30</strong>.
         </p>
         <p style={{ fontSize: 16, color: textSecondary, lineHeight: 1.7, marginBottom: 48, maxWidth: 600 }}>
-          14 dÃ­as de instalaciÃ³n. Resultados reales en 30. AsÃ­ de simple.
+          14 días de instalación. Resultados reales en 30. Así de simple.
         </p>
 
-        {/* 4 feature cards con Ã­conos */}
+        {/* 4 feature cards con íconos */}
         <div style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))",
@@ -890,7 +890,7 @@ export default function VenusLanding() {
           overflow: "hidden",
         }}>
           {[
-            { Icon: IconAds,  title: "Meta Ads (bien hechos)",  desc: "Sin mÃ©tricas de vanidad. Solo mÃ©tricas de dinero." },
+            { Icon: IconAds,  title: "Meta Ads (bien hechos)",  desc: "Sin métricas de vanidad. Solo métricas de dinero." },
             { Icon: IconBot,  title: "Bot de IA en WhatsApp",   desc: "Entrenado con AIDA y SPIN. Responde, califica y agenda. 24/7." },
             { Icon: IconCRM,  title: "CRM y Pipeline",          desc: "Tu flujo de pacientes organizado y visible. Sin Excel." },
             { Icon: IconSync, title: "Dentalink sync",          desc: "Las citas aparecen directo en tu agenda. Si no tienes agenda digital, te la instalamos." },
@@ -920,18 +920,18 @@ export default function VenusLanding() {
         </div>
       </Section>
 
-      {/* ââ CHECKLIST ââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ CHECKLIST ════════════════════════════════════════ */}
       <Section>
-        <Label text="DiagnÃ³stico rÃ¡pido" />
+        <Label text="Diagnóstico rápido" />
         <GoldRule />
         <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 8, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          Â¿Tu clÃ­nica tiene alguno de estos sÃ­ntomas?
+          ¿Tu clínica tiene alguno de estos síntomas?
         </h2>
         <p style={{ fontSize: 15, color: textSecondary, marginBottom: 32 }}>Marca los que te identifiquen.</p>
         <Checklist />
       </Section>
 
-      {/* ââ TRATAMIENTOS âââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ TRATAMIENTOS ═════════════════════════════════════ */}
       <Section>
         <Label text="Especialidades" />
         <GoldRule />
@@ -968,25 +968,25 @@ export default function VenusLanding() {
         </div>
       </Section>
 
-      {/* ââ TIMELINE âââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ TIMELINE ═════════════════════════════════════════ */}
       <Section>
-        <Label text="CÃ³mo funciona" />
+        <Label text="Cómo funciona" />
         <GoldRule />
         <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 44, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          De cero a <span style={{ color: gold }}>agenda llena</span> en 30 dÃ­as
+          De cero a <span style={{ color: gold }}>agenda llena</span> en 30 días
         </h2>
         <Timeline />
       </Section>
 
-      {/* ââ STACK ââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ STACK ════════════════════════════════════════════ */}
       <Section>
-        <Label text="QuÃ© incluye" />
+        <Label text="Qué incluye" />
         <GoldRule />
         <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 10, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
           Un sistema completo. No un "servicio de ads".
         </h2>
         <p style={{ fontSize: 16, color: textSecondary, marginBottom: 36, lineHeight: 1.6, maxWidth: 580 }}>
-          Todo lo que tu clÃ­nica necesita para captar pacientes de alto ticket de forma predecible.
+          Todo lo que tu clínica necesita para captar pacientes de alto ticket de forma predecible.
         </p>
         <div style={{ borderRadius: 3, border: `1px solid ${border}`, overflow: "hidden" }}>
           {stackItems.map((item, i) => (
@@ -1014,15 +1014,15 @@ export default function VenusLanding() {
         </div>
       </Section>
 
-      {/* ââ ROI ââââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ ROI ══════════════════════════════════════════════ */}
       <Section style={{ textAlign: "center" }}>
-        <Label text="Los nÃºmeros" />
+        <Label text="Los números" />
         <div style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: "0 auto 32px" }} />
         <h2 style={{ fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 600, marginBottom: 12, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          Â¿CuÃ¡nto vale un paciente nuevo para tu clÃ­nica?
+          ¿Cuánto vale un paciente nuevo para tu clínica?
         </h2>
         <p style={{ fontSize: 16, color: textSecondary, maxWidth: 480, margin: "0 auto 40px", lineHeight: 1.65 }}>
-          Haz la cuenta. Con los primeros pacientes que lleguen ya recuperas tu inversiÃ³n varias veces.
+          Haz la cuenta. Con los primeros pacientes que lleguen ya recuperas tu inversión varias veces.
         </p>
         <div style={{ maxWidth: 480, margin: "0 auto 28px", textAlign: "left" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -1049,25 +1049,25 @@ export default function VenusLanding() {
           maxWidth: 520, margin: "0 auto", textAlign: "left",
         }}>
           <p style={{ fontSize: 17, color: textPrimary, lineHeight: 1.7, marginBottom: 12 }}>
-            Te garantizamos mÃ­nimo <strong style={{ color: gold }}>10 citas en 30 dÃ­as</strong>. Si solo 3 se convierten en implantes, son mÃ¡s de <strong style={{ color: gold }}>$2.400.000 CLP en facturaciÃ³n extra</strong> por mes.
+            Te garantizamos mínimo <strong style={{ color: gold }}>10 citas en 30 días</strong>. Si solo 3 se convierten en implantes, son más de <strong style={{ color: gold }}>$2.400.000 CLP en facturación extra</strong> por mes.
           </p>
           <p style={{ fontSize: 14, color: textSecondary, lineHeight: 1.6, margin: 0 }}>
-            Â¿CuÃ¡nto te cuesta hoy no tener un sistema de captaciÃ³n? Cada mes sin pacientes nuevos es un sillÃ³n vacÃ­o y un arriendo que se sigue pagando.
+            ¿Cuánto te cuesta hoy no tener un sistema de captación? Cada mes sin pacientes nuevos es un sillón vacío y un arriendo que se sigue pagando.
           </p>
         </div>
       </Section>
 
-      {/* ââ GARANTÃA âââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ GARANTÍA ═════════════════════════════════════════ */}
       <Section style={{ textAlign: "center" }}>
         <Label text="Sin riesgo" />
         <div style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: "0 auto 32px" }} />
         <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, marginBottom: 32, lineHeight: 1.05, fontFamily: "'Outfit', sans-serif" }}>
-          GarantÃ­a <span style={{ color: gold }}>10 en 30</span>
+          Garantía <span style={{ color: gold }}>10 en 30</span>
         </h2>
         <div style={{ display: "flex", justifyContent: "center", gap: 60, marginBottom: 36, flexWrap: "wrap" }}>
           {[
             { target: 10, label: "citas confirmadas" },
-            { target: 30, label: "dÃ­as de plazo" },
+            { target: 30, label: "días de plazo" },
           ].map(({ target, label }, i) => (
             <FadeItem key={i} delay={i * 0.12}>
               <div style={{ textAlign: "center" }}>
@@ -1084,16 +1084,16 @@ export default function VenusLanding() {
           </FadeItem>
         </div>
         <p style={{ fontSize: 17, color: textSecondary, maxWidth: 560, margin: "0 auto 14px", lineHeight: 1.7 }}>
-          10 citas confirmadas con pacientes calificados en tu agenda de Dentalink en los primeros 30 dÃ­as de campaÃ±a activa. Si no llegan, <strong style={{ color: textPrimary }}>el segundo mes es gratis.</strong>
+          10 citas confirmadas con pacientes calificados en tu agenda de Dentalink en los primeros 30 días de campaña activa. Si no llegan, <strong style={{ color: textPrimary }}>el segundo mes es gratis.</strong>
         </p>
         <p style={{ fontSize: 14, color: textMuted, maxWidth: 440, margin: "0 auto" }}>
           No es generosidad. Es arrogancia basada en datos.
         </p>
       </Section>
 
-      {/* ââ CLIENTES âââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ CLIENTES ═════════════════════════════════════════ */}
       <Section>
-        <Label text="ClÃ­nicas que trabajan con Venus" />
+        <Label text="Clínicas que trabajan con Venus" />
         <GoldRule />
         <div style={{
           display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
@@ -1121,21 +1121,21 @@ export default function VenusLanding() {
         </div>
       </Section>
 
-      {/* ââ 100% DENTAL ââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ 100% DENTAL ══════════════════════════════════════ */}
       <Section style={{ textAlign: "center" }}>
         <h2 style={{
           fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 500, lineHeight: 1.2,
           fontFamily: "'Outfit', sans-serif", maxWidth: 640, margin: "0 auto 18px",
         }}>
-          Solo trabajamos con clÃ­nicas dentales.{" "}
+          Solo trabajamos con clínicas dentales.{" "}
           <span style={{ color: gold }}>Nunca aceptamos otro tipo de cliente.</span>
         </h2>
         <p style={{ fontSize: 15, color: textSecondary, maxWidth: 480, margin: "0 auto", lineHeight: 1.7 }}>
-          No hacemos marketing para restaurantes, no hacemos ecommerce, no hacemos "de todo un poco". Solo clÃ­nicas dentales. Eso nos permite entender tu paciente, tu mercado y tu negocio como nadie mÃ¡s.
+          No hacemos marketing para restaurantes, no hacemos ecommerce, no hacemos "de todo un poco". Solo clínicas dentales. Eso nos permite entender tu paciente, tu mercado y tu negocio como nadie más.
         </p>
       </Section>
 
-      {/* ââ CTA FINAL ââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ CTA FINAL ════════════════════════════════════════ */}
       <Section id="agendamiento" style={{ textAlign: "center", paddingBottom: 60 }}>
         <Label text="Empieza hoy" />
         <div style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: "0 auto 32px" }} />
@@ -1143,10 +1143,10 @@ export default function VenusLanding() {
           fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 500, lineHeight: 1.1,
           fontFamily: "'Outfit', sans-serif", maxWidth: 580, margin: "0 auto 18px",
         }}>
-          Agenda tu diagnÃ³stico gratuito
+          Agenda tu diagnóstico gratuito
         </h2>
         <p style={{ fontSize: 16, color: textSecondary, maxWidth: 460, margin: "0 auto 40px", lineHeight: 1.65 }}>
-          45 minutos donde analizamos tu situaciÃ³n actual y te mostramos exactamente cÃ³mo el Motor de Agenda 14/30 funciona para tu clÃ­nica.
+          45 minutos donde analizamos tu situación actual y te mostramos exactamente cómo el Motor de Agenda 14/30 funciona para tu clínica.
         </p>
         {/* GHL Widget */}
         <div style={{
@@ -1163,11 +1163,11 @@ export default function VenusLanding() {
           />
         </div>
         <p style={{ fontSize: 13, color: textMuted, letterSpacing: "0.04em" }}>
-          Sin compromiso Â· Sin costo Â· Sin letra chica
+          Sin compromiso · Sin costo · Sin letra chica
         </p>
       </Section>
 
-      {/* ââ FOOTER âââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ══ FOOTER ═══════════════════════════════════════════ */}
       <footer style={{
         padding: "28px 32px", borderTop: `1px solid ${border}`,
         display: "flex", justifyContent: "space-between", alignItems: "center",
