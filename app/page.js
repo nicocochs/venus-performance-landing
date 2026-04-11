@@ -1028,9 +1028,9 @@ export default function VenusLanding() {
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {[
               { left: "1 paciente de implantes",         right: "desde $800.000 CLP" },
-              { left: "1 paciente de carillas",          right: "desde $1.000.000 CLP" },
+              { left: "1 paciente de carillas",          right: "desde $700.000 CLP" },
               { left: "5 pacientes de implantes al mes", right: "desde $4.000.000 CLP" },
-              { left: "5 pacientes de carillas al mes",  right: "desde $5.000.000 CLP" },
+              { left: "5 pacientes de carillas al mes",  right: "desde $3.500.000 CLP" },
             ].map((row, i) => (
               <FadeItem key={i} delay={i * 0.08}>
                 <div style={{
