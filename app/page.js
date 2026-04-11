@@ -44,8 +44,8 @@ function BeamsHero({ children }) {
         angle,
         // slow drift so movement is clearly visible
         speed:      0.18 + Math.random() * 0.32,
-        // hue: deep gold 40 to warm amber 52
-        hue:        40 + Math.random() * 12,
+        // hue: deep violet 265 to purple 285
+        hue:        265 + Math.random() * 20,
         // high opacity — this is the key fix
         opacity:    0.28 + Math.random() * 0.32,
         pulse:      Math.random() * Math.PI * 2,
@@ -74,7 +74,7 @@ function BeamsHero({ children }) {
       beam.x        = col * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.6;
       beam.width    = 140 + Math.random() * 160;
       beam.speed    = 0.15 + Math.random() * 0.28;
-      beam.hue      = 38 + (i * 14) / total;
+      beam.hue      = 265 + (i * 20) / total;
       beam.opacity  = 0.26 + Math.random() * 0.3;
       return beam;
     }
@@ -338,7 +338,7 @@ function useScrollY() {
 
 // ─── ANIMATED ITEM (stagger child) ────────────────────────────
 function FadeItem({ children, delay = 0, style }) {
-  const r = useRef();
+  const r = useRef(null);
   const v = useInView(r, 0.08);
   return (
     <div
@@ -357,7 +357,7 @@ function FadeItem({ children, delay = 0, style }) {
 
 // ─── PRIMITIVES ───────────────────────────────────────────────
 function Section({ children, style, id }) {
-  const r = useRef();
+  const r = useRef(null);
   const v = useInView(r);
   return (
     <section
@@ -713,7 +713,7 @@ function Timeline() {
 
 // ─── COUNTER ──────────────────────────────────────────────────
 function Counter({ target, prefix }) {
-  const r = useRef();
+  const r = useRef(null);
   const v = useInView(r);
   const [val, setVal] = useState(0);
   useEffect(() => {
