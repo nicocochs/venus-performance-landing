@@ -10,9 +10,9 @@ function fireInitiateCheckout() {
 }
 
 // ─── TOKENS ───────────────────────────────────────────────────
-const gold        = "#C9A84C";
-const goldLight   = "#D4B85C";
-const goldDim     = "rgba(201,168,76,0.12)";
+const gold        = "#E6B84A";
+const goldLight   = "#F0C85A";
+const goldDim     = "rgba(230,184,74,0.12)";
 const bg          = "#080808";
 const bgCard      = "#111111";
 const bgCardAlt   = "#0E0E0E";
@@ -20,7 +20,7 @@ const textPrimary = "#F0EDE6";
 const textSecondary = "#C8C4BC";
 const textMuted   = "#8A8680";
 const border      = "#1E1E1E";
-const borderGold  = "rgba(201,168,76,0.25)";
+const borderGold  = "rgba(230,184,74,0.25)";
 
 // ─── BEAMS BACKGROUND ────────────────────────────────────────
 function BeamsHero({ children }) {
@@ -480,16 +480,16 @@ function Btn({ children, onClick, style }) {
         borderRadius: 100,
         boxShadow: [
           // outer rim — gold tinted
-          `0 0 0 1px rgba(201,168,76,0.55)`,
+          `0 0 0 1px rgba(230,184,74,0.55)`,
           // inner top highlight
           `inset 0 1px 1px rgba(255,255,255,0.22)`,
           // inner bottom shadow
           `inset 0 -1px 1px rgba(0,0,0,0.25)`,
           // soft outer glow
-          `0 4px 24px rgba(201,168,76,0.18)`,
-          hovered ? `0 8px 32px rgba(201,168,76,0.28)` : "",
+          `0 4px 24px rgba(230,184,74,0.18)`,
+          hovered ? `0 8px 32px rgba(230,184,74,0.28)` : "",
         ].filter(Boolean).join(", "),
-        background: "linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(201,168,76,0.06) 50%, rgba(255,255,255,0.04) 100%)",
+        background: "linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(230,184,74,0.06) 50%, rgba(255,255,255,0.04) 100%)",
         transition: "box-shadow 0.25s ease, background 0.25s ease",
         zIndex: -1,
       }} />
@@ -564,12 +564,12 @@ function FloatingCTA({ onClick }) {
       <span style={{
         position: "absolute", inset: 0, borderRadius: 100,
         boxShadow: [
-          `0 0 0 1px rgba(201,168,76,0.6)`,
+          `0 0 0 1px rgba(230,184,74,0.6)`,
           `inset 0 1px 1px rgba(255,255,255,0.25)`,
           `inset 0 -1px 1px rgba(0,0,0,0.2)`,
-          `0 8px 32px rgba(201,168,76,0.25)`,
+          `0 8px 32px rgba(230,184,74,0.25)`,
         ].join(", "),
-        background: "linear-gradient(160deg, rgba(255,255,255,0.1) 0%, rgba(201,168,76,0.08) 50%, rgba(255,255,255,0.04) 100%)",
+        background: "linear-gradient(160deg, rgba(255,255,255,0.1) 0%, rgba(230,184,74,0.08) 50%, rgba(255,255,255,0.04) 100%)",
         zIndex: -1,
       }} />
       <span style={{ position: "relative", zIndex: 1 }}>Agendar diagnóstico</span>
@@ -741,7 +741,7 @@ export default function VenusLanding() {
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        ::selection { background: rgba(201,168,76,0.2); color: #F0EDE6; }
+        ::selection { background: rgba(230,184,74,0.2); color: #F0EDE6; }
 
         /* Grain */
         body::before {
@@ -762,16 +762,16 @@ export default function VenusLanding() {
           to   { opacity: 1; transform: translateY(0); }
         }
         @keyframes pulseGold {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.25); }
-          50%       { box-shadow: 0 0 0 8px rgba(201,168,76,0); }
+          0%, 100% { box-shadow: 0 0 0 0 rgba(230,184,74,0.25); }
+          50%       { box-shadow: 0 0 0 8px rgba(230,184,74,0); }
         }
 
-        .feat-card:hover { border-color: rgba(201,168,76,0.3) !important; background: #0E0E0E !important; }
+        .feat-card:hover { border-color: rgba(230,184,74,0.3) !important; background: #0E0E0E !important; }
         .feat-card:hover .feat-icon { opacity: 1 !important; }
 
-        .stack-row:hover { background: rgba(201,168,76,0.07) !important; }
+        .stack-row:hover { background: rgba(230,184,74,0.07) !important; }
 
-        .treat-card:hover { border-color: rgba(201,168,76,0.3) !important; }
+        .treat-card:hover { border-color: rgba(230,184,74,0.3) !important; }
         .treat-card:hover .treat-icon { transform: scale(1.1) rotate(-3deg); }
         .treat-icon { transition: transform 0.3s ease; }
 
