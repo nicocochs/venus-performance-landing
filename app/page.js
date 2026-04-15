@@ -840,20 +840,13 @@ export default function VenusLanding() {
           {/* VSL — Wistia */}
           <div style={{
             maxWidth: 680, marginBottom: 48,
-            position: "relative",
-            paddingTop: "56.25%",
             borderRadius: 3,
             border: `1px solid ${border}`,
             overflow: "hidden",
             background: bgCard,
           }}>
-            <iframe
-              src="https://fast.wistia.net/embed/iframe/zn8nqqllca?seo=true&videoFoam=false"
-              title="Venus Performance Video"
-              allow="autoplay; fullscreen"
-              allowFullScreen
-              style={{ position: "absolute", inset: 0, width: "100%", height: "100%", border: "none" }}
-            />
+            <style dangerouslySetInnerHTML={{ __html: `wistia-player[media-id='du5mc2z1pq']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/du5mc2z1pq/swatch');display:block;filter:blur(5px);padding-top:56.25%;}` }} />
+            <wistia-player media-id="du5mc2z1pq" aspect="1.7777777777777777"></wistia-player>
           </div>
         </div>
 

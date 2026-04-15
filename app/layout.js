@@ -29,6 +29,15 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+        <Script
+          src="https://fast.wistia.com/player.js"
+          strategy="afterInteractive"
+        />
+        <Script
+          src="https://fast.wistia.com/embed/du5mc2z1pq.js"
+          strategy="afterInteractive"
+          type="module"
+        />
         <noscript>
           <img
             height="1"
