@@ -736,7 +736,7 @@ export default function VenusLanding() {
 
   const [iframeHeight, setIframeHeight] = useState(1450);
   const iframeWrapperRef = useRef(null);
-  const prevIframeHeightRef = useRef(1450);
+  const prevIframeHeightRef = useRef(null); // null = primer mensaje aún no recibido
 
   useEffect(() => {
     function handleMessage(e) {
@@ -755,7 +755,8 @@ export default function VenusLanding() {
       if (h && typeof h === "number" && h > 200) {
         const newH = Math.ceil(h) + 40;
         setIframeHeight(newH);
-        if (Math.abs(newH - prevIframeHeightRef.current) > 80 && iframeWrapperRef.current) {
+        // Solo scrollear en cambios de paso (no en la carga inicial)
+        if (prevIframeHeightRef.current !== null && Math.abs(newH - prevIframeHeightRef.current) > 80 && iframeWrapperRef.current) {
           setTimeout(() => {
             iframeWrapperRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
           }, 150);
