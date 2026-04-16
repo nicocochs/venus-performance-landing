@@ -734,6 +734,33 @@ function Counter({ target, prefix }) {
 export default function VenusLanding() {
   const scrollTo = () => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" });
 
+  const [iframeHeight, setIframeHeight] = useState(900);
+  const iframeWrapperRef = useRef(null);
+  const prevIframeHeightRef = useRef(900);
+
+  useEffect(() => {
+    function handleMessage(e) {
+      if (!e.data) return;
+      let h = null;
+      try {
+        const d = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        h = d.height || d.iframeHeight || null;
+      } catch {}
+      if (h && typeof h === "number" && h > 200) {
+        const newH = h + 40;
+        setIframeHeight(newH);
+        if (Math.abs(newH - prevIframeHeightRef.current) > 80 && iframeWrapperRef.current) {
+          setTimeout(() => {
+            iframeWrapperRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 150);
+        }
+        prevIframeHeightRef.current = newH;
+      }
+    }
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+
   return (
     <div style={{ background: bg, color: textPrimary, fontFamily: "'DM Sans', sans-serif", minHeight: "100vh", overflowX: "hidden" }}>
       <GlassFilterDef />
@@ -1142,14 +1169,14 @@ export default function VenusLanding() {
           45 minutos donde analizamos tu situación actual y te mostramos exactamente cómo el Motor de Agenda 14/30 funciona para tu clínica.
         </p>
         {/* GHL Widget */}
-        <div style={{
+        <div ref={iframeWrapperRef} style={{
           maxWidth: 700, margin: "0 auto 32px",
           borderRadius: 3, border: `1px solid ${border}`,
           overflow: "hidden", background: "#fff",
         }}>
           <iframe
             src="https://link.markgrowth.pro/widget/booking/6ul23q79B9gw6Hj6c0gC"
-            style={{ width: "100%", height: 1520, border: "none", display: "block" }}
+            style={{ width: "100%", height: iframeHeight, border: "none", display: "block" }}
             scrolling="no"
             id="6ul23q79B9gw6Hj6c0gC_venus"
             title="Agendamiento Venus Performance"
