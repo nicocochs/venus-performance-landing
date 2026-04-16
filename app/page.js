@@ -531,7 +531,7 @@ function FloatingCTA({ onClick }) {
       onMouseUp={() => setPressed(false)}
       style={{
         position: "fixed",
-        bottom: 28,
+        bottom: "calc(28px + env(safe-area-inset-bottom, 0px))",
         right: 28,
         zIndex: 1000,
         display: "inline-flex",
@@ -1162,7 +1162,7 @@ export default function VenusLanding() {
 
       {/* ══ FOOTER ═══════════════════════════════════════════ */}
       <footer style={{
-        padding: "28px 32px", borderTop: `1px solid ${border}`,
+        padding: "28px 32px 100px", borderTop: `1px solid ${border}`,
         display: "flex", justifyContent: "space-between", alignItems: "center",
         flexWrap: "wrap", gap: 12, maxWidth: 960, margin: "0 auto",
       }}>
