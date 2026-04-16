@@ -511,9 +511,9 @@ function CheckIcon() {
 }
 
 // ─── FLOATING CTA ─────────────────────────────────────────────
-function FloatingCTA({ onClick }) {
+function FloatingCTA({ onClick, inFormSection }) {
   const scrollY = useScrollY();
-  const visible = scrollY > 500;
+  const visible = scrollY > 500 && !inFormSection;
   const [pressed, setPressed] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -734,6 +734,18 @@ function Counter({ target, prefix }) {
 export default function VenusLanding() {
   const scrollTo = () => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" });
 
+  const [inFormSection, setInFormSection] = useState(false);
+  useEffect(() => {
+    const el = document.getElementById("agendamiento");
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInFormSection(entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   const [iframeHeight, setIframeHeight] = useState(1450);
   const iframeWrapperRef = useRef(null);
 
@@ -803,7 +815,7 @@ export default function VenusLanding() {
       `}</style>
 
       {/* FAB */}
-      <FloatingCTA onClick={scrollTo} />
+      <FloatingCTA onClick={scrollTo} inFormSection={inFormSection} />
 
       {/* ══ BEAMS — cubre toda la página ═════════════════════ */}
       <BeamsHero>
