@@ -36,6 +36,10 @@ export default function RootLayout({ children }) {
           }}
         />
         <Script
+          src="https://link.markgrowth.pro/js/form_embed.js"
+          strategy="afterInteractive"
+        />
+        <Script
           src="https://fast.wistia.com/player.js"
           strategy="afterInteractive"
         />

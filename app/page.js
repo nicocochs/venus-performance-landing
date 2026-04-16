@@ -743,11 +743,17 @@ export default function VenusLanding() {
       if (!e.data) return;
       let h = null;
       try {
-        const d = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
-        h = d.height || d.iframeHeight || null;
+        // Formato iFrameResizer: "[iFrameSizer]id:height:width:..."
+        if (typeof e.data === "string" && e.data.startsWith("[iFrameSizer]")) {
+          const parts = e.data.split(":");
+          h = parts[1] ? parseFloat(parts[1]) : null;
+        } else {
+          const d = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+          h = d.height || d.iframeHeight || null;
+        }
       } catch {}
       if (h && typeof h === "number" && h > 200) {
-        const newH = h + 40;
+        const newH = Math.ceil(h) + 40;
         setIframeHeight(newH);
         if (Math.abs(newH - prevIframeHeightRef.current) > 80 && iframeWrapperRef.current) {
           setTimeout(() => {
@@ -759,23 +765,6 @@ export default function VenusLanding() {
     }
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
-  }, []);
-
-  useEffect(() => {
-    let cooldown = false;
-    function onBlur() {
-      setTimeout(() => {
-        if (document.activeElement?.tagName === "IFRAME" && !cooldown) {
-          cooldown = true;
-          setTimeout(() => {
-            iframeWrapperRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 350);
-          setTimeout(() => { cooldown = false; }, 2500);
-        }
-      }, 50);
-    }
-    window.addEventListener("blur", onBlur);
-    return () => window.removeEventListener("blur", onBlur);
   }, []);
 
   return (
