@@ -736,14 +736,12 @@ export default function VenusLanding() {
 
   const [iframeHeight, setIframeHeight] = useState(1450);
   const iframeWrapperRef = useRef(null);
-  const prevIframeHeightRef = useRef(null); // null = primer mensaje aún no recibido
 
   useEffect(() => {
     function handleMessage(e) {
       if (!e.data) return;
       let h = null;
       try {
-        // Formato iFrameResizer: "[iFrameSizer]id:height:width:..."
         if (typeof e.data === "string" && e.data.startsWith("[iFrameSizer]")) {
           const parts = e.data.split(":");
           h = parts[1] ? parseFloat(parts[1]) : null;
@@ -753,15 +751,7 @@ export default function VenusLanding() {
         }
       } catch {}
       if (h && typeof h === "number" && h > 200) {
-        const newH = Math.ceil(h) + 40;
-        setIframeHeight(newH);
-        // Solo scrollear en cambios de paso (no en la carga inicial)
-        if (prevIframeHeightRef.current !== null && Math.abs(newH - prevIframeHeightRef.current) > 80 && iframeWrapperRef.current) {
-          setTimeout(() => {
-            iframeWrapperRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
-          }, 150);
-        }
-        prevIframeHeightRef.current = newH;
+        setIframeHeight(Math.ceil(h) + 40);
       }
     }
     window.addEventListener("message", handleMessage);
