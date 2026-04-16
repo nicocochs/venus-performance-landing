@@ -734,9 +734,9 @@ function Counter({ target, prefix }) {
 export default function VenusLanding() {
   const scrollTo = () => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" });
 
-  const [iframeHeight, setIframeHeight] = useState(900);
+  const [iframeHeight, setIframeHeight] = useState(1450);
   const iframeWrapperRef = useRef(null);
-  const prevIframeHeightRef = useRef(900);
+  const prevIframeHeightRef = useRef(1450);
 
   useEffect(() => {
     function handleMessage(e) {
