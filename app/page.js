@@ -1149,7 +1149,7 @@ export default function VenusLanding() {
         }}>
           <iframe
             src="https://link.markgrowth.pro/widget/booking/6ul23q79B9gw6Hj6c0gC"
-            style={{ width: "100%", height: 1700, border: "none", display: "block" }}
+            style={{ width: "100%", height: 1520, border: "none", display: "block" }}
             scrolling="no"
             id="6ul23q79B9gw6Hj6c0gC_venus"
             title="Agendamiento Venus Performance"
