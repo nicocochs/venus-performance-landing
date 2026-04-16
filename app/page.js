@@ -761,6 +761,23 @@ export default function VenusLanding() {
     return () => window.removeEventListener("message", handleMessage);
   }, []);
 
+  useEffect(() => {
+    let cooldown = false;
+    function onBlur() {
+      setTimeout(() => {
+        if (document.activeElement?.tagName === "IFRAME" && !cooldown) {
+          cooldown = true;
+          setTimeout(() => {
+            iframeWrapperRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 350);
+          setTimeout(() => { cooldown = false; }, 2500);
+        }
+      }, 50);
+    }
+    window.addEventListener("blur", onBlur);
+    return () => window.removeEventListener("blur", onBlur);
+  }, []);
+
   return (
     <div style={{ background: bg, color: textPrimary, fontFamily: "'DM Sans', sans-serif", minHeight: "100vh", overflowX: "hidden" }}>
       <GlassFilterDef />
