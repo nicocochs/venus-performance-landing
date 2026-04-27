@@ -58,8 +58,9 @@ function BeamsHero({ children }) {
       canvas.width  = canvas.offsetWidth  * dpr;
       canvas.height = canvas.offsetHeight * dpr;
       ctx.scale(dpr, dpr);
-      // fewer, bigger beams = blob feel matching reference
-      beamsRef.current = Array.from({ length: 16 }, () =>
+      const isMobile = canvas.offsetWidth < 768;
+      canvas.style.filter = `blur(${isMobile ? "18px" : "28px"})`;
+      beamsRef.current = Array.from({ length: isMobile ? 4 : 8 }, () =>
         createBeam(canvas.offsetWidth, canvas.offsetHeight)
       );
     }
@@ -98,8 +99,6 @@ function BeamsHero({ children }) {
 
     function animate() {
       ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-      // less canvas blur = movement visible; CSS blur on element handles softness
-      ctx.filter = "blur(8px)";
       const total = beamsRef.current.length;
       beamsRef.current.forEach((beam, i) => {
         beam.y     -= beam.speed;
@@ -111,8 +110,14 @@ function BeamsHero({ children }) {
     }
 
     animate();
+    const handleVisibility = () => {
+      if (document.hidden) cancelAnimationFrame(rafRef.current);
+      else animate();
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
     return () => {
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibility);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
   }, []);
@@ -312,28 +317,31 @@ const stackItems = [
 ];
 
 // ─── HOOKS ────────────────────────────────────────────────────
+// Shared observer registry: one IntersectionObserver per unique threshold
+const _ioRegistry = new Map();
+function _getIO(threshold) {
+  if (!_ioRegistry.has(threshold)) {
+    const cbs = new Map();
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach(e => cbs.get(e.target)?.(e)),
+      { threshold }
+    );
+    _ioRegistry.set(threshold, { io, cbs });
+  }
+  return _ioRegistry.get(threshold);
+}
+
 function useInView(ref, threshold = 0.1) {
   const [v, setV] = useState(false);
   useEffect(() => {
-    if (!ref.current) return;
-    const o = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) setV(true); },
-      { threshold }
-    );
-    o.observe(ref.current);
-    return () => o.disconnect();
-  }, [ref]);
+    const el = ref.current;
+    if (!el) return;
+    const { io, cbs } = _getIO(threshold);
+    cbs.set(el, (e) => { if (e.isIntersecting) setV(true); });
+    io.observe(el);
+    return () => { io.unobserve(el); cbs.delete(el); };
+  }, [ref, threshold]);
   return v;
-}
-
-function useScrollY() {
-  const [y, setY] = useState(0);
-  useEffect(() => {
-    const handler = () => setY(window.scrollY);
-    window.addEventListener("scroll", handler, { passive: true });
-    return () => window.removeEventListener("scroll", handler);
-  }, []);
-  return y;
 }
 
 // ─── ANIMATED ITEM (stagger child) ────────────────────────────
@@ -511,9 +519,7 @@ function CheckIcon() {
 }
 
 // ─── FLOATING CTA ─────────────────────────────────────────────
-function FloatingCTA({ onClick, inFormSection }) {
-  const scrollY = useScrollY();
-  const visible = scrollY > 500 && !inFormSection;
+function FloatingCTA({ onClick, visible }) {
   const [pressed, setPressed] = useState(false);
   const [hovered, setHovered] = useState(false);
 
@@ -732,6 +738,17 @@ function Counter({ target, prefix }) {
 
 // ─── MAIN ─────────────────────────────────────────────────────
 export default function VenusLanding() {
+  const sentinelRef = useRef(null);
+  const [floatVisible, setFloatVisible] = useState(false);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const o = new IntersectionObserver(([e]) => setFloatVisible(!e.isIntersecting));
+    o.observe(el);
+    return () => o.disconnect();
+  }, []);
+
   const scrollTo = () => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" });
 
   const [inFormSection, setInFormSection] = useState(false);
@@ -772,21 +789,12 @@ export default function VenusLanding() {
 
   return (
     <div style={{ background: bg, color: textPrimary, fontFamily: "'DM Sans', sans-serif", minHeight: "100vh", overflowX: "hidden" }}>
+      <div ref={sentinelRef} style={{ position: "absolute", top: 500, height: 1, pointerEvents: "none" }} />
       <GlassFilterDef />
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         ::selection { background: rgba(230,184,74,0.2); color: #F0EDE6; }
-
-        /* Grain */
-        body::before {
-          content: '';
-          position: fixed; inset: 0;
-          opacity: 0.025;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-          pointer-events: none; z-index: 9999;
-        }
 
         /* Gold shimmer keyframe (decorative line) */
         @keyframes shimmer {
@@ -815,7 +823,7 @@ export default function VenusLanding() {
       `}</style>
 
       {/* FAB */}
-      <FloatingCTA onClick={scrollTo} inFormSection={inFormSection} />
+      <FloatingCTA onClick={scrollTo} visible={floatVisible && !inFormSection} />
 
       {/* ══ BEAMS — cubre toda la página ═════════════════════ */}
       <BeamsHero>
@@ -1187,6 +1195,7 @@ export default function VenusLanding() {
             src="https://link.markgrowth.pro/widget/booking/6ul23q79B9gw6Hj6c0gC"
             style={{ width: "100%", height: iframeHeight, border: "none", display: "block" }}
             scrolling="no"
+            loading="lazy"
             id="6ul23q79B9gw6Hj6c0gC_venus"
             title="Agendamiento Venus Performance"
           />
