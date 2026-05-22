@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
           }}
         />
         <Script
-          src="https://link.markgrowth.pro/js/form_embed.js"
+          src="https://link.msgsndr.com/js/form_embed.js"
           strategy="afterInteractive"
         />
         <Script
