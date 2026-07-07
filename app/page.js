@@ -267,9 +267,10 @@ const clients = [
   { name: "Dental Plaza",         loc: "Copiapó" },
   { name: "Tus Odontopediatras",  loc: "San Fernando" },
   { name: "Excelli",              loc: "Garanhuns, Brasil" },
-  { name: "Clínica Fetaluwn",     loc: "Providencia, Santiago" },
-  { name: "Dr. Héctor Yañez",     loc: "Santiago" },
-  { name: "Dentilife",            loc: "Reñaca" },
+  { name: "Dr. Hugo Pereira",     loc: "Valdivia" },
+  { name: "Dr. Rafael Guarín",    loc: "Santiago" },
+  { name: "Novadent",             loc: "Viña del Mar" },
+  { name: "OG Dental Premium",    loc: "Santiago" },
 ];
 
 const painPoints = [
@@ -663,7 +664,7 @@ function Checklist() {
           Cada punto que marcaste es facturación que se está yendo a tu competencia. Sin un sistema de captación profesional, estos problemas no se resuelven solos. Se acumulan.
         </p>
         <p style={{ fontSize: 15, color: textPrimary, lineHeight: 1.7, margin: "0 0 20px", fontFamily: "'DM Sans', sans-serif" }}>
-          El <strong style={{ color: gold }}>Motor de Agenda 14/30</strong> resuelve esto en 14 días. Con garantía: <strong>10 citas confirmadas en tu Dentalink en 30 días o no pagas el segundo mes.</strong>
+          El <strong style={{ color: gold }}>Motor de Agenda 14/30</strong> resuelve esto en 14 días: un sistema de captación profesional que llena tu agenda de Dentalink con pacientes de alto ticket.
         </p>
         <Btn onClick={() => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" })} style={{ width: "100%" }}>
           Agenda tu diagnóstico gratuito
@@ -714,25 +715,6 @@ function Timeline() {
         </p>
       </div>
     </div>
-  );
-}
-
-// ─── COUNTER ──────────────────────────────────────────────────
-function Counter({ target, prefix }) {
-  const r = useRef(null);
-  const v = useInView(r);
-  const [val, setVal] = useState(0);
-  useEffect(() => {
-    if (!v) return;
-    let s = 0;
-    const d = 1000 / target;
-    const t = setInterval(() => { s++; setVal(s); if (s >= target) clearInterval(t); }, d);
-    return () => clearInterval(t);
-  }, [v, target]);
-  return (
-    <span ref={r} style={{ fontSize: 52, fontWeight: 700, color: gold, fontFamily: "'Outfit', sans-serif", letterSpacing: "-0.02em" }}>
-      {prefix || ""}{val}
-    </span>
   );
 }
 
@@ -876,7 +858,7 @@ export default function VenusLanding() {
             Instalamos el Motor de Agenda 14/30 en tu clínica. Tu agenda se llena de pacientes de alto ticket. Tú no tocas el marketing.
           </p>
           <p style={{ fontSize: 14, color: textMuted, maxWidth: 440, marginBottom: 48, lineHeight: 1.5 }}>
-            14 días de instalación. Resultados garantizados en 30.
+            14 días de instalación. Primeros resultados en 30.
           </p>
         </div>
 
@@ -1086,46 +1068,12 @@ export default function VenusLanding() {
           maxWidth: 520, margin: "0 auto", textAlign: "left",
         }}>
           <p style={{ fontSize: 17, color: textPrimary, lineHeight: 1.7, marginBottom: 12 }}>
-            Te garantizamos mínimo <strong style={{ color: gold }}>10 citas en 30 días</strong>. Si solo 3 se convierten en implantes, son más de <strong style={{ color: gold }}>$2.400.000 CLP en facturación extra</strong> por mes.
+            Con un solo paciente de implantes al mes ya recuperas la inversión. Si llegan tres, son más de <strong style={{ color: gold }}>$2.400.000 CLP en facturación extra</strong> por mes.
           </p>
           <p style={{ fontSize: 14, color: textSecondary, lineHeight: 1.6, margin: 0 }}>
             ¿Cuánto te cuesta hoy no tener un sistema de captación? Cada mes sin pacientes nuevos es un sillón vacío y un arriendo que se sigue pagando.
           </p>
         </div>
-      </Section>
-
-      {/* ══ GARANTÍA ═════════════════════════════════════════ */}
-      <Section style={{ textAlign: "center" }}>
-        <Label text="Sin riesgo" />
-        <div style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: "0 auto 32px" }} />
-        <h2 style={{ fontSize: "clamp(28px, 4vw, 48px)", fontWeight: 600, marginBottom: 32, lineHeight: 1.05, fontFamily: "'Outfit', sans-serif" }}>
-          Garantía <span style={{ color: gold }}>10 en 30</span>
-        </h2>
-        <div style={{ display: "flex", justifyContent: "center", gap: 60, marginBottom: 36, flexWrap: "wrap" }}>
-          {[
-            { target: 10, label: "citas confirmadas" },
-            { target: 30, label: "días de plazo" },
-          ].map(({ target, label }, i) => (
-            <FadeItem key={i} delay={i * 0.12}>
-              <div style={{ textAlign: "center" }}>
-                <Counter target={target} />
-                <p style={{ fontSize: 13, color: textSecondary, marginTop: 6, letterSpacing: "0.05em" }}>{label}</p>
-              </div>
-            </FadeItem>
-          ))}
-          <FadeItem delay={0.24}>
-            <div style={{ textAlign: "center" }}>
-              <span style={{ fontSize: 52, fontWeight: 700, color: gold, fontFamily: "'Outfit', sans-serif" }}>$0</span>
-              <p style={{ fontSize: 13, color: textSecondary, marginTop: 6, letterSpacing: "0.05em" }}>si no cumplimos</p>
-            </div>
-          </FadeItem>
-        </div>
-        <p style={{ fontSize: 17, color: textSecondary, maxWidth: 560, margin: "0 auto 14px", lineHeight: 1.7 }}>
-          10 citas confirmadas con pacientes calificados en tu agenda de Dentalink en los primeros 30 días de campaña activa. Si no llegan, <strong style={{ color: textPrimary }}>el segundo mes es gratis.</strong>
-        </p>
-        <p style={{ fontSize: 14, color: textMuted, maxWidth: 440, margin: "0 auto" }}>
-          No es generosidad. Es arrogancia basada en datos.
-        </p>
       </Section>
 
       {/* ══ CLIENTES ═════════════════════════════════════════ */}
