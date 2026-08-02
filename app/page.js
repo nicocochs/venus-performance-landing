@@ -238,6 +238,14 @@ const IconSync = () => (
   </svg>
 );
 
+const IconLanding = () => (
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={gold} strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="2"/>
+    <path d="M3 8h18"/>
+    <path d="M7 12h10M7 15.5h6"/>
+  </svg>
+);
+
 // ─── DATA ─────────────────────────────────────────────────────
 const treatments = [
   {
@@ -264,9 +272,9 @@ const treatments = [
 
 const clients = [
   { name: "Clínica És",          loc: "Providencia, Santiago" },
-  { name: "Dental Plaza",         loc: "Copiapó" },
   { name: "Tus Odontopediatras",  loc: "San Fernando" },
   { name: "Excelli",              loc: "Garanhuns, Brasil" },
+  { name: "Dra. Rafaela Amorim",  loc: "Garanhuns, Brasil" },
   { name: "Dr. Hugo Pereira",     loc: "Valdivia" },
   { name: "Dr. Rafael Guarín",    loc: "Santiago" },
   { name: "Novadent",             loc: "Viña del Mar" },
@@ -305,16 +313,6 @@ const timelineSteps = [
   { day: "Días 1 al 7",  title: "Configuración del sistema", desc: "Bot de IA con métodos AIDA y SPIN, CRM, pipeline completo, integración con Dentalink. Todo queda funcionando." },
   { day: "Días 7 al 14", title: "Campaña activa",          desc: "Campañas de Meta Ads lanzadas con guiones probados para tu tratamiento. Los primeros leads empiezan a llegar." },
   { day: "Días 15 al 30",title: "Primeros resultados",     desc: "Pacientes calificados agendando en tu Dentalink de forma automática. Tú solo operas." },
-];
-
-const stackItems = [
-  { name: "Campañas Meta Ads",                  desc: "Diseñadas exclusivamente para odontología de alto ticket. Sin métricas de vanidad." },
-  { name: "Bot de IA en WhatsApp 24/7",          desc: "Entrenado con métodos de venta AIDA y SPIN. Responde, califica y agenda solo." },
-  { name: "El mejor CRM del mercado y Pipeline", desc: "Tu flujo de pacientes organizado desde el primer contacto hasta la silla." },
-  { name: "Sincronización con Dentalink",        desc: "Las citas aparecen directo en tu agenda. Si no tienes agenda digital, te la instalamos. Pregúntanos por compatibilidad con otras plataformas." },
-  { name: "4 guiones de anuncios Venus por mes", desc: "Scripts de anuncios con estructura probada. Tú solo grabas." },
-  { name: "Protocolo de Conversión Venus",       desc: "Entrenamiento de ventas para dentista en silla y guión de ventas para tu recepcionista." },
-  { name: "Dashboard Venus",                     desc: "Métricas en tiempo real. Cuántos leads, cuántas conversaciones, cuántas citas. Sin PDFs inútiles." },
 ];
 
 // ─── HOOKS ────────────────────────────────────────────────────
@@ -510,14 +508,6 @@ function Btn({ children, onClick, style }) {
   );
 }
 
-function CheckIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0, marginTop: 3 }}>
-      <circle cx="8" cy="8" r="8" fill={goldDim} />
-      <path d="M4.5 8l2.5 2.5 4.5-4.5" stroke={gold} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 // ─── FLOATING CTA ─────────────────────────────────────────────
 function FloatingCTA({ onClick, visible }) {
@@ -795,7 +785,6 @@ export default function VenusLanding() {
         .feat-card:hover { border-color: rgba(230,184,74,0.3) !important; background: #0E0E0E !important; }
         .feat-card:hover .feat-icon { opacity: 1 !important; }
 
-        .stack-row:hover { background: rgba(230,184,74,0.07) !important; }
 
         .treat-card:hover { border-color: rgba(230,184,74,0.3) !important; }
         .treat-card:hover .treat-icon { transform: scale(1.1) rotate(-3deg); }
@@ -913,6 +902,7 @@ export default function VenusLanding() {
             { Icon: IconBot,  title: "Bot de IA en WhatsApp",   desc: "Entrenado con AIDA y SPIN. Responde, califica y agenda. 24/7." },
             { Icon: IconCRM,  title: "CRM y Pipeline",          desc: "Tu flujo de pacientes organizado y visible. Sin Excel." },
             { Icon: IconSync, title: "Dentalink sync",          desc: "Las citas aparecen directo en tu agenda. Si no tienes agenda digital, te la instalamos." },
+            { Icon: IconLanding, title: "Landing page",         desc: "Diseñada y escrita por nosotros. Hecha para convertir al visitante en paciente." },
           ].map(({ Icon, title, desc }, i) => (
             <FadeItem key={i} delay={i * 0.08}>
               <div
@@ -997,59 +987,23 @@ export default function VenusLanding() {
         <Timeline />
       </Section>
 
-      {/* ══ STACK ════════════════════════════════════════════ */}
-      <Section>
-        <Label text="Qué incluye" />
-        <GoldRule />
-        <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 10, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          Un sistema completo. No un "servicio de ads".
-        </h2>
-        <p style={{ fontSize: 16, color: textSecondary, marginBottom: 36, lineHeight: 1.6, maxWidth: 580 }}>
-          Todo lo que tu clínica necesita para captar pacientes de alto ticket de forma predecible.
-        </p>
-        <div style={{ borderRadius: 3, border: `1px solid ${border}`, overflow: "hidden" }}>
-          {stackItems.map((item, i) => (
-            <FadeItem key={i} delay={i * 0.07}>
-              <div
-                className="stack-row"
-                style={{
-                  display: "flex", gap: 18, padding: "18px 24px",
-                  background: i % 2 === 0 ? bgCard : bg,
-                  borderBottom: i < stackItems.length - 1 ? `1px solid ${border}` : "none",
-                  alignItems: "flex-start",
-                  transition: "background 0.2s ease",
-                }}
-              >
-                <CheckIcon />
-                <div>
-                  <p style={{ fontSize: 15, fontWeight: 600, color: textPrimary, marginBottom: 4, fontFamily: "'Outfit', sans-serif", fontSize: 16 }}>
-                    {item.name}
-                  </p>
-                  <p style={{ fontSize: 13, color: textSecondary, lineHeight: 1.55 }}>{item.desc}</p>
-                </div>
-              </div>
-            </FadeItem>
-          ))}
-        </div>
-      </Section>
-
-      {/* ══ ROI ══════════════════════════════════════════════ */}
+      {/* ══ COSTO DE OPORTUNIDAD ═════════════════════════════ */}
       <Section style={{ textAlign: "center" }}>
         <Label text="Los números" />
         <div style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: "0 auto 32px" }} />
         <h2 style={{ fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 600, marginBottom: 12, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          ¿Cuánto vale un paciente nuevo para tu clínica?
+          ¿Cuánto dinero estás dejando en la calle?
         </h2>
-        <p style={{ fontSize: 16, color: textSecondary, maxWidth: 480, margin: "0 auto 40px", lineHeight: 1.65 }}>
-          Haz la cuenta. Con los primeros pacientes que lleguen ya recuperas tu inversión varias veces.
+        <p style={{ fontSize: 16, color: textSecondary, maxWidth: 500, margin: "0 auto 40px", lineHeight: 1.65 }}>
+          Haz la cuenta con tu propio ticket. Cada paciente que no te encontró, que no recibió respuesta a tiempo o que no volvió a escribir, terminó sentado en otra clínica.
         </p>
         <div style={{ maxWidth: 480, margin: "0 auto 28px", textAlign: "left" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {[
-              { left: "1 paciente de implantes",         right: "desde $800.000 CLP" },
-              { left: "1 paciente de carillas",          right: "desde $700.000 CLP" },
-              { left: "5 pacientes de implantes al mes", right: "desde $4.000.000 CLP" },
-              { left: "5 pacientes de carillas al mes",  right: "desde $3.500.000 CLP" },
+              { left: "Un paciente de implantes que no llegó",   right: "$800.000 CLP" },
+              { left: "Un paciente de carillas que no llegó",    right: "$700.000 CLP" },
+              { left: "3 pacientes de implantes al mes",         right: "$2.400.000 CLP" },
+              { left: "Ese mismo mes, repetido todo un año",     right: "$28.800.000 CLP" },
             ].map((row, i) => (
               <FadeItem key={i} delay={i * 0.08}>
                 <div style={{
@@ -1068,10 +1022,10 @@ export default function VenusLanding() {
           maxWidth: 520, margin: "0 auto", textAlign: "left",
         }}>
           <p style={{ fontSize: 17, color: textPrimary, lineHeight: 1.7, marginBottom: 12 }}>
-            Con un solo paciente de implantes al mes ya recuperas la inversión. Si llegan tres, son más de <strong style={{ color: gold }}>$2.400.000 CLP en facturación extra</strong> por mes.
+            Tres pacientes de implantes al mes que se van a la competencia son <strong style={{ color: gold }}>$28.800.000 CLP al año</strong> que nunca entraron a tu caja.
           </p>
           <p style={{ fontSize: 14, color: textSecondary, lineHeight: 1.6, margin: 0 }}>
-            ¿Cuánto te cuesta hoy no tener un sistema de captación? Cada mes sin pacientes nuevos es un sillón vacío y un arriendo que se sigue pagando.
+            Esa plata no aparece en ninguna planilla, porque es facturación que jamás existió. El sillón vacío y el arriendo del mes sí aparecen.
           </p>
         </div>
       </Section>
