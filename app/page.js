@@ -47,7 +47,7 @@ function BeamsHero({ children }) {
         // hue: deep violet 265 to purple 285
         hue:        265 + Math.random() * 20,
         // high opacity — this is the key fix
-        opacity:    0.42 + Math.random() * 0.36,
+        opacity:    0.50 + Math.random() * 0.38,
         pulse:      Math.random() * Math.PI * 2,
         pulseSpeed: 0.012 + Math.random() * 0.018,
       };
@@ -76,7 +76,7 @@ function BeamsHero({ children }) {
       beam.width    = 160 + Math.random() * 180;
       beam.speed    = 0.15 + Math.random() * 0.28;
       beam.hue      = 265 + (i * 20) / total;
-      beam.opacity  = 0.40 + Math.random() * 0.34;
+      beam.opacity  = 0.48 + Math.random() * 0.36;
       return beam;
     }
 
@@ -86,12 +86,12 @@ function BeamsHero({ children }) {
       ctx.rotate((beam.angle * Math.PI) / 180);
       const po = beam.opacity * (0.75 + Math.sin(beam.pulse) * 0.25);
       const g  = ctx.createLinearGradient(0, 0, 0, beam.length);
-      g.addColorStop(0,    `hsla(${beam.hue},85%,62%,0)`);
-      g.addColorStop(0.08, `hsla(${beam.hue},85%,62%,${po * 0.4})`);
-      g.addColorStop(0.35, `hsla(${beam.hue},85%,62%,${po})`);
-      g.addColorStop(0.55, `hsla(${beam.hue},85%,62%,${po})`);
-      g.addColorStop(0.88, `hsla(${beam.hue},85%,62%,${po * 0.4})`);
-      g.addColorStop(1,    `hsla(${beam.hue},85%,62%,0)`);
+      g.addColorStop(0,    `hsla(${beam.hue},85%,64%,0)`);
+      g.addColorStop(0.08, `hsla(${beam.hue},85%,64%,${po * 0.4})`);
+      g.addColorStop(0.35, `hsla(${beam.hue},85%,64%,${po})`);
+      g.addColorStop(0.55, `hsla(${beam.hue},85%,64%,${po})`);
+      g.addColorStop(0.88, `hsla(${beam.hue},85%,64%,${po * 0.4})`);
+      g.addColorStop(1,    `hsla(${beam.hue},85%,64%,0)`);
       ctx.fillStyle = g;
       ctx.fillRect(-beam.width / 2, 0, beam.width, beam.length);
       ctx.restore();
@@ -141,7 +141,7 @@ function BeamsHero({ children }) {
       <div style={{
         position: "fixed",
         inset: 0,
-        background: "rgba(8,8,8,0.42)",
+        background: "rgba(8,8,8,0.32)",
         pointerEvents: "none",
         zIndex: 1,
       }} />
