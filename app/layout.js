@@ -4,6 +4,15 @@ export const metadata = {
   title: "Venus Performance | Motor de Agenda 14/30",
   description: "Instalamos un sistema de captación de pacientes en tu clínica dental. 14 días de instalación. 10 citas confirmadas en 30 días. Garantizado.",
   themeColor: "#080808",
+  // Los iconos viven en public/ y no en app/ para poder versionarlos: Chrome
+  // cachea el favicon de forma muy persistente y no lo suelta ni con un hard
+  // reload. Subir el ?v= es la unica forma confiable de forzar el refresco.
+  // Ojo: si hubiera un app/icon.* o app/apple-icon.*, Next usaria esos archivos
+  // e ignoraria por completo este bloque.
+  icons: {
+    icon: [{ url: "/favicon.ico?v=2", sizes: "16x16 32x32 48x48", type: "image/x-icon" }],
+    apple: [{ url: "/apple-icon.png?v=2", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export const viewport = {
@@ -60,15 +69,20 @@ export default function RootLayout({ children }) {
           strategy="afterInteractive"
           type="module"
         />
-        <noscript>
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            src="https://www.facebook.com/tr?id=1151846457038387&ev=PageView&noscript=1"
-            alt=""
-          />
-        </noscript>
+        {/*
+          El <img> va como HTML crudo a proposito. Si se escribe como elemento
+          JSX, Next lo detecta en el arbol y le agrega un
+          <link rel="preload" as="image">, con lo cual el navegador descarga la
+          URL aunque el <noscript> nunca se muestre. Esa descarga cuenta como un
+          PageView y por eso el pixel registraba dos.
+        */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html:
+              '<img height="1" width="1" style="display:none" alt="" ' +
+              'src="https://www.facebook.com/tr?id=1151846457038387&ev=PageView&noscript=1" />',
+          }}
+        />
       </body>
     </html>
   );
