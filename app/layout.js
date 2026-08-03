@@ -38,6 +38,10 @@ export default function RootLayout({ children }) {
               t.src=v;s=b.getElementsByTagName(e)[0];
               s.parentNode.insertBefore(t,s)}(window, document,'script',
               'https://connect.facebook.net/en_US/fbevents.js');
+              // Desactiva la configuracion automatica del pixel: es la que
+              // dispara SubscribedButtonClick al hacer clic en cualquier boton.
+              // Va antes del init para que no alcance a registrarse.
+              fbq('set', 'autoConfig', false, '1151846457038387');
               fbq('init', '1151846457038387');
               fbq('track', 'PageView');
             `,
