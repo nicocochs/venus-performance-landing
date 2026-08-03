@@ -318,7 +318,7 @@ const timelineSteps = [
 const faqs = [
   {
     q: "¿Cuánto cuesta?",
-    a: "Somos reservados con nuestros precios, y te decimos derechamente por qué: un número suelto no significa nada hasta saber qué se instala en tu clínica y qué vale para ti un paciente de alto ticket. Publicarlo solo sirve para que nos compares con quien te vende cuatro publicaciones al mes, que es otra cosa. Te lo damos completo en el diagnóstico, en los primeros minutos y sin rodeos.",
+    a: "Somos reservados con nuestros precios, y te decimos derechamente por qué: un número suelto no significa nada hasta saber qué se instala en tu clínica y qué vale para ti un paciente de alto ticket. Publicarlo solo sirve para que nos compares con quien te vende cuatro publicaciones al mes, que es otra cosa. Te lo damos completo en el diagnóstico, sin rodeos.",
   },
   {
     q: "¿Se sincronizan con Dentalink?",
@@ -326,11 +326,11 @@ const faqs = [
   },
   {
     q: "¿Cuánto tiempo pasa hasta ver resultados?",
-    a: "Los primeros pacientes suelen aparecer dentro de los 30 días, alrededor de 15 días después de lanzar las campañas. Hay clínicas que se demoran algo más y es normal: depende del tratamiento, de tu ciudad y de la velocidad con que se responda a los pacientes.",
+    a: "Los primeros pacientes suelen aparecer dentro de los 30 días, alrededor de 15 días después de lanzar las campañas. Hay clínicas que se demoran algo más y es normal: depende del tratamiento, de tu ciudad, de la velocidad con que se responda a los pacientes y de lo rápido que el dentista grabe su material.",
   },
   {
     q: "¿Qué tengo que hacer yo?",
-    a: "Grabar 4 videos cada mes y medio, y atender a los pacientes que lleguen. La edición, la estrategia de campañas en Meta Ads, el montaje de la landing, el sistema de IA y el seguimiento por WhatsApp corren por nuestra cuenta.",
+    a: "Grabar 4 videos cada mes y medio, y atender a los pacientes que lleguen. Nosotros escribimos los guiones y te los entregamos listos para grabar, ya sea con tu celular o con producción. La edición, la estrategia de campañas en Meta Ads, el montaje de la landing, el sistema de IA y el seguimiento por WhatsApp corren por nuestra cuenta.",
   },
   {
     q: "Ya trabajé con una agencia y no funcionó. ¿En qué son distintos?",
