@@ -315,6 +315,29 @@ const timelineSteps = [
   { day: "Días 15 al 30",title: "Primeros resultados",     desc: "Pacientes calificados agendando en tu Dentalink de forma automática. Tú solo operas." },
 ];
 
+const faqs = [
+  {
+    q: "¿Cuánto cuesta?",
+    a: "Depende de tu ciudad, tu especialidad y del volumen de pacientes que quieras sostener, así que no publicamos un precio único que después no calce con tu caso. En el diagnóstico de 45 minutos revisamos tu situación y te damos el número exacto, sin rodeos.",
+  },
+  {
+    q: "¿Necesito tener Dentalink para trabajar con ustedes?",
+    a: "No. Si ya lo usas, sincronizamos las citas directo con tu agenda. Si no tienes agenda digital, te la instalamos nosotros. Y si trabajas con otra plataforma, pregúntanos por compatibilidad.",
+  },
+  {
+    q: "¿Cuánto tiempo pasa hasta ver resultados?",
+    a: "La instalación toma 14 días: campañas, bot de WhatsApp, CRM, landing y sincronización con tu agenda. Los primeros resultados reales aparecen dentro de los 30 días.",
+  },
+  {
+    q: "¿Qué tengo que hacer yo?",
+    a: "Grabar los videos y atender a los pacientes que lleguen. Te entregamos 4 guiones de anuncios al mes con estructura probada: tú solo grabas. Del resto —campañas, respuestas, seguimiento y agendamiento— nos encargamos nosotros.",
+  },
+  {
+    q: "Ya trabajé con una agencia y no funcionó. ¿En qué son distintos?",
+    a: "Una agencia te entrega anuncios y un reporte de likes. Nosotros instalamos el sistema completo que va desde el anuncio hasta la cita en tu agenda, y solo trabajamos con clínicas dentales. Esa es la diferencia: no repartimos la atención entre restaurantes, ecommerce y de todo un poco.",
+  },
+];
+
 // ─── HOOKS ────────────────────────────────────────────────────
 // Shared observer registry: one IntersectionObserver per unique threshold
 const _ioRegistry = new Map();
@@ -709,6 +732,75 @@ function Timeline() {
 }
 
 // ─── MAIN ─────────────────────────────────────────────────────
+function Faq() {
+  const [abierta, setAbierta] = useState(null);
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+      {faqs.map((f, i) => {
+        const on = abierta === i;
+        return (
+          <FadeItem key={i} delay={i * 0.06}>
+            <div style={{
+              borderRadius: 3,
+              border: `1px solid ${on ? borderGold : border}`,
+              background: on ? goldDim : bgCard,
+              transition: "border-color 0.2s ease, background 0.2s ease",
+              overflow: "hidden",
+            }}>
+              <button
+                onClick={() => setAbierta(on ? null : i)}
+                aria-expanded={on}
+                style={{
+                  width: "100%", display: "flex", alignItems: "center", gap: 16,
+                  padding: "18px 22px", background: "none", border: "none",
+                  cursor: "pointer", textAlign: "left", font: "inherit",
+                }}
+              >
+                <span style={{
+                  flex: 1, fontSize: 16, fontWeight: 600,
+                  color: on ? textPrimary : textSecondary,
+                  fontFamily: "'Outfit', sans-serif", lineHeight: 1.4,
+                  transition: "color 0.2s",
+                }}>
+                  {f.q}
+                </span>
+                {/* chevron: rota al abrir */}
+                <svg
+                  width="16" height="16" viewBox="0 0 24 24" fill="none"
+                  stroke={on ? gold : textMuted} strokeWidth="2"
+                  strokeLinecap="round" strokeLinejoin="round"
+                  style={{
+                    flexShrink: 0,
+                    transform: on ? "rotate(180deg)" : "none",
+                    transition: "transform 0.25s ease, stroke 0.2s ease",
+                  }}
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+              {/* el grid 0fr/1fr anima la altura sin tener que medirla */}
+              <div style={{
+                display: "grid",
+                gridTemplateRows: on ? "1fr" : "0fr",
+                transition: "grid-template-rows 0.28s ease",
+              }}>
+                <div style={{ overflow: "hidden" }}>
+                  <p style={{
+                    margin: 0, padding: "0 22px 20px",
+                    fontSize: 14, color: textSecondary, lineHeight: 1.7,
+                  }}>
+                    {f.a}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </FadeItem>
+        );
+      })}
+    </div>
+  );
+}
+
 export default function VenusLanding() {
   const sentinelRef = useRef(null);
   const [floatVisible, setFloatVisible] = useState(false);
@@ -1104,6 +1196,16 @@ export default function VenusLanding() {
         <p style={{ fontSize: 13, color: textMuted, letterSpacing: "0.04em" }}>
           Sin compromiso · Sin costo · Sin letra chica
         </p>
+      </Section>
+
+      {/* ══ FAQ ══════════════════════════════════════════════ */}
+      <Section>
+        <Label text="Preguntas frecuentes" />
+        <GoldRule />
+        <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 32, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif" }}>
+          Lo que todo dentista nos pregunta antes de empezar
+        </h2>
+        <Faq />
       </Section>
 
       {/* ══ FOOTER ═══════════════════════════════════════════ */}

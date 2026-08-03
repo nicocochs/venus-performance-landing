@@ -2,7 +2,7 @@ import Script from 'next/script';
 
 export const metadata = {
   title: "Venus Performance | Motor de Agenda 14/30",
-  description: "Instalamos un sistema de captación de pacientes en tu clínica dental. 14 días de instalación. 10 citas confirmadas en 30 días. Garantizado.",
+  description: "Instalamos un sistema completo de captación de pacientes en tu clínica dental: campañas de Meta Ads, bot de IA en WhatsApp, CRM y sincronización con tu agenda. Solo trabajamos con clínicas dentales.",
   themeColor: "#080808",
   // Los iconos viven en public/ y no en app/ para poder versionarlos: Chrome
   // cachea el favicon de forma muy persistente y no lo suelta ni con un hard
