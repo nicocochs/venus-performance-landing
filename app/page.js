@@ -318,23 +318,23 @@ const timelineSteps = [
 const faqs = [
   {
     q: "¿Cuánto cuesta?",
-    a: "Depende de tu ciudad, tu especialidad y del volumen de pacientes que quieras sostener, así que no publicamos un precio único que después no calce con tu caso. En el diagnóstico de 45 minutos revisamos tu situación y te damos el número exacto, sin rodeos.",
+    a: "Somos reservados con nuestros precios, y te decimos derechamente por qué: un número suelto no significa nada hasta saber qué se instala en tu clínica y qué vale para ti un paciente de alto ticket. Publicarlo solo sirve para que nos compares con quien te vende cuatro publicaciones al mes, que es otra cosa. Te lo damos completo en el diagnóstico, en los primeros minutos y sin rodeos.",
   },
   {
-    q: "¿Necesito tener Dentalink para trabajar con ustedes?",
-    a: "No. Si ya lo usas, sincronizamos las citas directo con tu agenda. Si no tienes agenda digital, te la instalamos nosotros. Y si trabajas con otra plataforma, pregúntanos por compatibilidad.",
+    q: "¿Se sincronizan con Dentalink?",
+    a: "Sí. Somos partners oficiales de Dentalink, así que si todavía no lo tienes podemos conseguirte un pequeño descuento. Si usas otra plataforma, nos conectamos con cualquiera que tenga API. Y si no tienes ninguna agenda digital, te damos una sin costo.",
   },
   {
     q: "¿Cuánto tiempo pasa hasta ver resultados?",
-    a: "La instalación toma 14 días: campañas, bot de WhatsApp, CRM, landing y sincronización con tu agenda. Los primeros resultados reales aparecen dentro de los 30 días.",
+    a: "Los primeros pacientes suelen aparecer dentro de los 30 días, alrededor de 15 días después de lanzar las campañas. Hay clínicas que se demoran algo más y es normal: depende del tratamiento, de tu ciudad y de la velocidad con que se responda a los pacientes.",
   },
   {
     q: "¿Qué tengo que hacer yo?",
-    a: "Grabar los videos y atender a los pacientes que lleguen. Te entregamos 4 guiones de anuncios al mes con estructura probada: tú solo grabas. Del resto —campañas, respuestas, seguimiento y agendamiento— nos encargamos nosotros.",
+    a: "Grabar 4 videos cada mes y medio, y atender a los pacientes que lleguen. La edición, la estrategia de campañas en Meta Ads, el montaje de la landing, el sistema de IA y el seguimiento por WhatsApp corren por nuestra cuenta.",
   },
   {
     q: "Ya trabajé con una agencia y no funcionó. ¿En qué son distintos?",
-    a: "Una agencia te entrega anuncios y un reporte de likes. Nosotros instalamos el sistema completo que va desde el anuncio hasta la cita en tu agenda, y solo trabajamos con clínicas dentales. Esa es la diferencia: no repartimos la atención entre restaurantes, ecommerce y de todo un poco.",
+    a: "En que estamos especializados en clínicas odontológicas y no somos generalistas. Sabemos qué anuncios funcionan para implantes, cuáles para carillas y cuáles no funcionan para nada, porque lo vemos todos los días en clínicas como la tuya. Una agencia generalista tiene que averiguarlo con tu presupuesto.",
   },
 ];
 
