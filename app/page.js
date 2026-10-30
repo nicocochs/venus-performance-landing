@@ -271,13 +271,12 @@ const treatments = [
 ];
 
 const clients = [
-  { name: "Clínica És",          loc: "Providencia, Santiago" },
+  { name: "Clínica Es",          loc: "Providencia, Santiago" },
   { name: "Tus Odontopediatras",  loc: "San Fernando" },
   { name: "Excelli",              loc: "Garanhuns, Brasil" },
   { name: "Dra. Rafaela Amorim",  loc: "Garanhuns, Brasil" },
   { name: "Dr. Hugo Pereira",     loc: "Valdivia" },
   { name: "Dr. Rafael Guarín",    loc: "Santiago" },
-  { name: "Novadent",             loc: "Viña del Mar" },
   { name: "OG Dental Premium",    loc: "Santiago" },
 ];
 
