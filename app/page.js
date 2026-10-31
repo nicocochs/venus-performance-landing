@@ -751,11 +751,17 @@ function Vsl() {
     if (!p) return;
     try { p.currentTime = t; p.play(); } catch {}
   };
+  // El script de Wistia modifica el <wistia-player>; se monta solo en el navegador
+  // para que React no choque con el HTML del servidor al hidratar.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
   return (
     <div style={{ maxWidth: 820, margin: "0 auto" }}>
       <div style={{ borderRadius: 14, overflow: "hidden", border: `1px solid ${borderGold}`, background: bgCard, boxShadow: "0 30px 90px rgba(230,184,74,0.10)" }}>
         <style dangerouslySetInnerHTML={{ __html: `wistia-player[media-id='${VSL_ID}']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/${VSL_ID}/swatch');display:block;filter:blur(5px);padding-top:56.25%;}` }} />
-        <wistia-player media-id={VSL_ID} aspect="1.7777777777777777"></wistia-player>
+        {mounted
+          ? <wistia-player media-id={VSL_ID} aspect="1.7777777777777777"></wistia-player>
+          : <div style={{ paddingTop: "56.25%", background: `center/contain no-repeat url('https://fast.wistia.com/embed/medias/${VSL_ID}/swatch')`, filter: "blur(5px)" }} />}
       </div>
       {SHOW_CHAPTERS && (
         <div className="chapters" style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center", marginTop: 16 }}>
@@ -1041,7 +1047,8 @@ export default function VenusLanding() {
   return (
     <div style={{ background: bg, color: textPrimary, fontFamily: "'DM Sans', sans-serif", minHeight: "100vh", overflowX: "hidden" }}>
       <GlassFilterDef />
-      <style>{`
+      {/* Va como HTML crudo: si se pasa como texto, el servidor escapa el ">" y React no logra hidratar. */}
+      <style dangerouslySetInnerHTML={{ __html: `
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         ::selection { background: rgba(230,184,74,0.2); color: #F0EDE6; }
@@ -1066,7 +1073,7 @@ export default function VenusLanding() {
           .chapter { flex-shrink: 0; white-space: nowrap; }
         }
         @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
-      `}</style>
+      ` }} />
 
       <FloatingCTA onClick={scrollToForm} visible={floatVisible && !inFormSection} />
 
