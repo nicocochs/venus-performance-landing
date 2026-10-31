@@ -247,71 +247,92 @@ const IconLanding = () => (
 );
 
 // ─── DATA ─────────────────────────────────────────────────────
-const treatments = [
+// ─── DATOS ────────────────────────────────────────────────────
+// VSL v3 en Wistia. Los capítulos salen de las secciones del guion (minuto:segundo).
+const VSL_ID = "c46nin7kuw";
+const VSL_CHAPTERS = [
+  { t: 0,   label: "Para quién es este video" },
+  { t: 33,  label: "El problema real" },
+  { t: 69,  label: "Los hoyos del embudo" },
+  { t: 98,  label: "¿Otra agencia más?" },
+  { t: 115, label: "Cómo empezó Venus" },
+  { t: 179, label: "El sistema" },
+  { t: 262, label: "Casos reales" },
+  { t: 318, label: "El diagnóstico" },
+  { t: 331, label: "Para quién no es" },
+];
+const SHOW_CHAPTERS = true;
+
+// Doctores del carrusel. `img` es opcional: sin foto se muestra la inicial.
+const doctors = [
+  { name: "Dr. Rafael Guarín",   spec: "Implantes",              loc: "Las Condes, Santiago",  img: "/img/doctores/rafael-guarin.webp" },
+  { name: "Dra. Fabiana Llanos", spec: "Implantes",              loc: "Providencia, Santiago", img: "/img/doctores/fabiana-llanos.webp" },
+  { name: "Dr. Hugo Pereira",    spec: "Periodoncia e implantes", loc: "Valdivia",             img: "/img/doctores/hugo-pereira.webp" },
+  { name: "Dras. Javiera Farías y Daniela Paredes", spec: "Odontopediatría", loc: "San Fernando", img: "/img/doctores/tus-odontopediatras.webp" },
+  { name: "Dra. Pilar Llanos",   spec: "Ortodoncia infantil",    loc: "Providencia, Santiago", img: "/img/doctores/pilar-llanos.webp" },
+  { name: "Dr. Óscar González",  spec: "Implantes y carillas",   loc: "Providencia, Santiago", img: "/img/doctores/oscar-gonzalez.webp" },
+  { name: "Dra. Karine Pinheiro", spec: "Carillas",              loc: "Brasil",                img: "/img/doctores/karine-pinheiro.webp" },
+  { name: "Dr. Sergio Llanos",   spec: "Cirugía facial",         loc: "Providencia, Santiago", img: "/img/doctores/sergio-llanos.webp" },
+  { name: "Dr. Jorge González",  spec: "Implantes",              loc: "Santiago",              img: "/img/doctores/jorge-valeria-smile.webp" },
+  { name: "Dra. Rafaela Amorim", spec: "Ortodoncia invisible",   loc: "Garanhuns, Brasil",     img: "/img/doctores/rafaela-amorim.webp" },
+];
+
+// Loops de anuncios reales (public/ads/<slug>.mp4 + .webp)
+const adLoops = [
+  { src: "/ads/hugo-plan-claro.mp4", poster: "/ads/hugo-plan-claro.webp" },
+  { src: "/ads/clinica-es-orto-ronquido.mp4", poster: "/ads/clinica-es-orto-ronquido.webp" },
+  { src: "/ads/guarin-agosto.mp4", poster: "/ads/guarin-agosto.webp" },
+  { src: "/ads/og-carillas-espacio.mp4", poster: "/ads/og-carillas-espacio.webp" },
+  { src: "/ads/clinica-es-arbitro.mp4", poster: "/ads/clinica-es-arbitro.webp" },
+  { src: "/ads/tus-ronquido.mp4", poster: "/ads/tus-ronquido.webp" },
+  { src: "/ads/clinica-es-vaso.mp4", poster: "/ads/clinica-es-vaso.webp" },
+  { src: "/ads/privilege-desiste.mp4", poster: "/ads/privilege-desiste.webp" },
+  { src: "/ads/og-implantes-presupuesto.mp4", poster: "/ads/og-implantes-presupuesto.webp" },
+];
+
+
+// Casos del VSL: solo inversión en anuncios y lo que cerró la clínica.
+const cases = [
+  { name: "Dr. Rafael",  sub: "Implantes · 1 mes",                     inv: 608160,  cer: 32632267, cur: "$" },
+  { name: "Dra. Fabiana", sub: "Implantes · febrero a octubre",        inv: 3321355, cer: 51501000, cur: "$" },
+  { name: "Dra. Pilar",  sub: "Ortodoncia infantil · 1 mes",           inv: 464047,  cer: 9836240,  cur: "$" },
+  { name: "Dra. Rafaela", sub: "Ortodoncia invisible · Brasil · 1er mes", inv: 1863, cer: 18100,    cur: "R$" },
+];
+
+const steps = [
   {
-    name: "Implantes",
-    desc: "Pacientes que ya decidieron invertir en su salud",
-    Icon: IconImplant,
+    n: "01", title: "Grabas. Nosotros hacemos el resto.",
+    desc: "Grabas 4 videos cada mes y medio, incluso con tu celular. Nosotros escribimos los guiones, editamos y lanzamos las campañas en Meta.",
+    visual: "ads",
   },
   {
-    name: "Carillas",
-    desc: "El tratamiento de mayor impacto visual y ticket",
-    Icon: IconVeneer,
+    n: "02", title: "Los pacientes llegan y se agendan solos.",
+    desc: "Llegan a una página hecha para tu clínica. Nuestro asistente de IA les responde por WhatsApp a cualquier hora y los agenda directo en tu Dentalink.",
+    visual: "chat",
   },
   {
-    name: "Ortodoncia tradicional e invisible",
-    desc: "Adultos con poder adquisitivo que quieren discreción",
-    Icon: IconAligner,
+    n: "03", title: "Nadie se pierde por el camino.",
+    desc: "El asistente hace seguimiento a los que agendaron y no asistieron, y los vuelve a agendar.",
+    visual: "agenda",
   },
   {
-    name: "Ortodoncia infantil",
-    desc: "Los papás que cuidan a sus hijos pagan sin dudar",
-    Icon: IconChild,
+    n: "04", title: "Tu clínica cierra más tratamientos.",
+    desc: "A fin de mes te pasamos la lista de los que asistieron y no cerraron, para que tu equipo los llame. Y capacitamos a tus dentistas para vender mejor.",
+    visual: "report",
   },
 ];
 
-const clients = [
-  { name: "Clínica Es",          loc: "Providencia, Santiago" },
-  { name: "Tus Odontopediatras",  loc: "San Fernando" },
-  { name: "Excelli",              loc: "Garanhuns, Brasil" },
-  { name: "Dra. Rafaela Amorim",  loc: "Garanhuns, Brasil" },
-  { name: "Dr. Hugo Pereira",     loc: "Valdivia" },
-  { name: "Dr. Rafael Guarín",    loc: "Santiago" },
-  { name: "OG Dental Premium",    loc: "Santiago" },
+const forYou = [
+  { t: <>Tu clínica hace <b>implantes, carillas u ortodoncia</b>.</>, why: "Son tratamientos de ticket alto: un solo paciente que cierra paga varios meses de anuncios. Con tratamientos de bajo valor los números no dan." },
+  { t: <>Puedes invertir <b>al menos $20.000 diarios</b> en anuncios.</>, why: "Con menos presupuesto, Meta no junta datos suficientes para encontrar a tus pacientes y los resultados tardan demasiado. Ese dinero va directo a Meta, aparte de nuestro servicio." },
+  { t: <>Tú o alguien de tu equipo puede <b>grabar 4 videos</b> cada mes y medio.</>, why: "Los anuncios que mejor funcionan muestran al dentista real. Nosotros escribimos los guiones y editamos; tú solo grabas." },
+  { t: <>Alguien en tu clínica <b>atiende y cierra</b> a los pacientes que llegan.</>, why: "Nosotros llevamos al paciente hasta tu sillón. La venta del tratamiento ocurre en tu clínica, y te capacitamos para cerrar más." },
 ];
 
-const painPoints = [
-  {
-    text: "Dependo del boca a boca para conseguir pacientes nuevos",
-    svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.29-1.29a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>,
-  },
-  {
-    text: "No sé cuántos pacientes nuevos llegaron este mes ni por qué canal",
-    svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>,
-  },
-  {
-    text: "He pagado por marketing y solo recibí reportes de likes e impresiones",
-    svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>,
-  },
-  {
-    text: "Hago promos o descuentos para llenar la agenda",
-    svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>,
-  },
-  {
-    text: "No puedo tomarme vacaciones sin que la agenda se vacíe",
-    svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>,
-  },
-  {
-    text: "Trabajo más de 10 horas diarias y la clínica sigue dependiendo de mí",
-    svg: <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={textSecondary} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
-  },
-];
-
-const timelineSteps = [
-  { day: "Día 0",        title: "Diagnóstico gratuito",    desc: "Analizamos tu captación actual y diseñamos tu sistema personalizado. 45 minutos que te van a abrir los ojos." },
-  { day: "Días 1 al 7",  title: "Configuración del sistema", desc: "Bot de IA con métodos AIDA y SPIN, CRM, pipeline completo, integración con Dentalink. Todo queda funcionando." },
-  { day: "Días 7 al 14", title: "Campaña activa",          desc: "Campañas de Meta Ads lanzadas con guiones probados para tu tratamiento. Los primeros leads empiezan a llegar." },
-  { day: "Días 15 al 30",title: "Primeros resultados",     desc: "Pacientes calificados agendando en tu Dentalink de forma automática. Tú solo operas." },
+const notForYou = [
+  { t: <>No eres una <b>clínica dental</b>.</>, why: "Solo trabajamos con clínicas dentales y nunca aceptamos otro tipo de cliente. Eso nos permite conocer a tu paciente mejor que nadie." },
+  { t: <>Buscas la <b>opción más barata</b>.</>, why: "Un sistema completo de captación no compite en precio con quien vende cuatro publicaciones al mes. Si el precio es lo único que importa, no somos para ti." },
+  { t: <>Esperas <b>resultados milagrosos</b> en una semana.</>, why: "Los primeros pacientes suelen llegar dentro de los 30 días, y para eso necesitamos que grabes y que tu equipo responda rápido." },
 ];
 
 const faqs = [
@@ -320,22 +341,42 @@ const faqs = [
     a: "Somos reservados con nuestros precios, y te decimos derechamente por qué: un número suelto no significa nada hasta saber qué se instala en tu clínica y qué vale para ti un paciente de alto ticket. Publicarlo solo sirve para que nos compares con quien te vende cuatro publicaciones al mes, que es otra cosa. Te lo damos completo en el diagnóstico, sin rodeos.",
   },
   {
-    q: "¿Se sincronizan con Dentalink?",
-    a: "Sí. Somos partners oficiales de Dentalink, así que si todavía no lo tienes podemos conseguirte un pequeño descuento. Si usas otra plataforma, nos conectamos con cualquiera que tenga API. Y si no tienes ninguna agenda digital, te damos una sin costo.",
+    q: "¿Cuál es el compromiso mínimo?",
+    a: "Puedes trabajar con nosotros mes a mes o con un plan trimestral. El plan mensual es más caro.",
+  },
+  {
+    q: "¿Hay garantía?",
+    a: "No. Quien te garantiza pacientes te promete algo que no depende solo de él. Lo que sí hacemos es decirte en el diagnóstico si vemos que no te podemos ayudar.",
+  },
+  {
+    q: "¿Tengo que salir en cámara?",
+    a: "Sí, tú o alguien de tu equipo. Son 4 videos cada mes y medio, y nosotros escribimos los guiones y los editamos.",
+  },
+  {
+    q: "¿Cuánto tengo que invertir en anuncios?",
+    a: "Recomendamos partir con al menos $20.000 diarios. Ese dinero va directo a Meta y es aparte de nuestro servicio.",
   },
   {
     q: "¿Cuánto tiempo pasa hasta ver resultados?",
     a: "Los primeros pacientes suelen aparecer dentro de los 30 días, alrededor de 15 días después de lanzar las campañas. Hay clínicas que se demoran algo más y es normal: depende del tratamiento, de tu ciudad, de la velocidad con que se responda a los pacientes y de lo rápido que el dentista grabe su material.",
   },
   {
-    q: "¿Qué tengo que hacer yo?",
-    a: "Grabar 4 videos cada mes y medio, y atender a los pacientes que lleguen. Nosotros escribimos los guiones y te los entregamos listos para grabar, ya sea con tu celular o con producción. La edición, la estrategia de campañas en Meta Ads, el montaje de la landing, el sistema de IA y el seguimiento por WhatsApp corren por nuestra cuenta.",
+    q: "¿Se sincronizan con Dentalink?",
+    a: "Sí. Somos partners oficiales de Dentalink, así que si todavía no lo tienes podemos conseguirte un pequeño descuento. Si usas otra plataforma, nos conectamos con cualquiera que tenga API. Y si no tienes ninguna agenda digital, te damos una sin costo.",
   },
   {
     q: "Ya trabajé con una agencia y no funcionó. ¿En qué son distintos?",
     a: "En que estamos especializados en clínicas odontológicas y no somos generalistas. Sabemos qué anuncios funcionan para implantes, cuáles para carillas y cuáles no funcionan para nada, porque lo vemos todos los días en clínicas como la tuya. Una agencia generalista tiene que averiguarlo con tu presupuesto.",
   },
+  {
+    q: "¿Cómo empiezo?",
+    a: "Llenas el formulario de arriba y eliges día y hora para tu diagnóstico gratuito de 45 minutos.",
+  },
 ];
+
+const clp = n => Math.round(n).toLocaleString("es-CL");
+const roi = (inv, cer) => { const m = cer / inv; return (m >= 10 ? Math.round(m) : m.toFixed(1).replace(".", ",")) + "x"; };
+const scrollToForm = () => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth", block: "start" });
 
 // ─── HOOKS ────────────────────────────────────────────────────
 // Shared observer registry: one IntersectionObserver per unique threshold
@@ -596,141 +637,7 @@ function FloatingCTA({ onClick, visible }) {
   );
 }
 
-// ─── CHECKLIST ────────────────────────────────────────────────
-function Checklist() {
-  const [checked, setChecked] = useState(new Set());
-  const toggle = i => {
-    const n = new Set(checked);
-    n.has(i) ? n.delete(i) : n.add(i);
-    setChecked(n);
-  };
-  const show = checked.size >= 2;
-  return (
-    <div>
-      <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-        {painPoints.map((p, i) => {
-          const on = checked.has(i);
-          return (
-            <FadeItem key={i} delay={i * 0.06}>
-              <div
-                onClick={() => toggle(i)}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 16,
-                  padding: "16px 20px",
-                  borderRadius: 3,
-                  border: `1px solid ${on ? borderGold : border}`,
-                  background: on ? goldDim : bgCard,
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                }}
-              >
-                <span style={{ flexShrink: 0, opacity: 0.7 }}>{p.svg}</span>
-                <span style={{
-                  flex: 1,
-                  fontSize: 15,
-                  color: on ? textPrimary : textSecondary,
-                  lineHeight: 1.5,
-                  fontFamily: "'DM Sans', sans-serif",
-                  transition: "color 0.2s",
-                }}>
-                  {p.text}
-                </span>
-                <div style={{
-                  width: 20,
-                  height: 20,
-                  borderRadius: 2,
-                  border: `1.5px solid ${on ? gold : "#333"}`,
-                  background: on ? gold : "transparent",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  transition: "all 0.2s",
-                  flexShrink: 0,
-                }}>
-                  {on && <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M1.5 5.5l3 3 5-5" stroke="#080808" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>}
-                </div>
-              </div>
-            </FadeItem>
-          );
-        })}
-      </div>
-      <div style={{
-        marginTop: 20,
-        padding: "24px 28px",
-        borderRadius: 6,
-        border: "1px solid rgba(180,50,50,0.25)",
-        background: "rgba(8,8,8,0.82)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        opacity: show ? 1 : 0,
-        maxHeight: show ? 600 : 0,
-        overflow: "hidden",
-        transition: "all 0.45s ease",
-      }}>
-        <p style={{ fontSize: 16, fontWeight: 600, color: "#e05555", marginBottom: 12, fontFamily: "'Outfit', sans-serif" }}>
-          Tu clínica está perdiendo pacientes ahora mismo.
-        </p>
-        <p style={{ fontSize: 15, color: "#B0ACA8", lineHeight: 1.7, margin: "0 0 12px", fontFamily: "'DM Sans', sans-serif" }}>
-          Cada punto que marcaste es facturación que se está yendo a tu competencia. Sin un sistema de captación profesional, estos problemas no se resuelven solos. Se acumulan.
-        </p>
-        <p style={{ fontSize: 15, color: textPrimary, lineHeight: 1.7, margin: "0 0 20px", fontFamily: "'DM Sans', sans-serif" }}>
-          El <strong style={{ color: gold }}>Motor de Agenda 14/30</strong> resuelve esto en 14 días: un sistema de captación profesional que llena tu agenda de Dentalink con pacientes de alto ticket.
-        </p>
-        <Btn onClick={() => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" })} style={{ width: "100%" }}>
-          Agenda tu diagnóstico gratuito
-        </Btn>
-      </div>
-    </div>
-  );
-}
-
-// ─── TIMELINE ─────────────────────────────────────────────────
-function Timeline() {
-  const [active, setActive] = useState(0);
-  return (
-    <div>
-      <div style={{ display: "flex", gap: 0, position: "relative", marginBottom: 24 }}>
-        {timelineSteps.map((s, i) => (
-          <div key={i} onClick={() => setActive(i)} style={{ flex: 1, cursor: "pointer", textAlign: "center", padding: "12px 4px", position: "relative" }}>
-            <div style={{
-              width: 10, height: 10, borderRadius: "50%",
-              background: i <= active ? gold : "#2A2A2A",
-              border: `1.5px solid ${i <= active ? gold : "#444"}`,
-              margin: "0 auto 12px", transition: "all 0.3s", position: "relative", zIndex: 2,
-            }} />
-            {i < timelineSteps.length - 1 && (
-              <div style={{
-                position: "absolute", top: 17, left: "50%", width: "100%", height: 1,
-                background: i < active ? gold : "#222", transition: "background 0.3s", zIndex: 1,
-              }} />
-            )}
-            <p style={{ fontSize: 10, color: i <= active ? gold : textMuted, fontWeight: 500, margin: "0 0 4px", letterSpacing: "0.12em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif" }}>
-              {s.day}
-            </p>
-            <p style={{ fontSize: 12, color: i <= active ? textPrimary : textSecondary, fontWeight: 500, margin: 0, lineHeight: 1.3, fontFamily: "'DM Sans', sans-serif" }}>
-              {s.title}
-            </p>
-          </div>
-        ))}
-      </div>
-      <div style={{ padding: "24px 28px", background: bgCard, borderRadius: 3, border: `1px solid ${border}`, borderLeft: `2px solid ${gold}` }}>
-        <p style={{ fontSize: 11, color: gold, fontWeight: 500, margin: "0 0 8px", letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif" }}>
-          {timelineSteps[active].day}
-        </p>
-        <p style={{ fontSize: 17, fontWeight: 600, color: textPrimary, margin: "0 0 10px", fontFamily: "'Outfit', sans-serif" }}>
-          {timelineSteps[active].title}
-        </p>
-        <p style={{ fontSize: 15, color: textSecondary, margin: 0, lineHeight: 1.65, fontFamily: "'DM Sans', sans-serif" }}>
-          {timelineSteps[active].desc}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// ─── MAIN ─────────────────────────────────────────────────────
+// ─── FAQ ──────────────────────────────────────────────────────
 function Faq() {
   const [abierta, setAbierta] = useState(null);
   return (
@@ -800,35 +707,75 @@ function Faq() {
   );
 }
 
-export default function VenusLanding() {
-  const sentinelRef = useRef(null);
-  const [floatVisible, setFloatVisible] = useState(false);
+// ─── TÍTULOS ──────────────────────────────────────────────────
+const h2 = { fontSize: "clamp(28px, 4vw, 44px)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "-0.02em", fontFamily: "'Outfit', sans-serif", color: textPrimary };
 
+// ─── BARRA DE AVANCE ──────────────────────────────────────────
+function ScrollProgress() {
+  const [p, setP] = useState(0);
   useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-    const o = new IntersectionObserver(([e]) => setFloatVisible(!e.isIntersecting));
-    o.observe(el);
-    return () => o.disconnect();
+    const on = () => {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      setP(h > 0 ? Math.min(1, scrollY / h) : 0);
+    };
+    on();
+    addEventListener("scroll", on, { passive: true });
+    return () => removeEventListener("scroll", on);
   }, []);
+  return <div style={{ position: "absolute", left: 0, bottom: -1, height: 2, width: `${p * 100}%`, background: gold, transition: "width 0.1s linear" }} />;
+}
 
-  const scrollTo = () => document.getElementById("agendamiento")?.scrollIntoView({ behavior: "smooth" });
+// ─── LOGOS DE PLATAFORMAS ─────────────────────────────────────
+function PlatformLogos() {
+  const box = { width: 40, height: 40, borderRadius: 11, display: "flex", alignItems: "center", justifyContent: "center", background: bgCard, border: `1px solid ${border}` };
+  return (
+    <div style={{ display: "flex", gap: 12, justifyContent: "center", marginBottom: 36 }}>
+      <div style={box} title="Meta">
+        <svg width="24" height="16" viewBox="0 0 36 24" fill="none"><path d="M3 15.5C3 9 6.5 3 10.5 3c3 0 5.2 2.6 7.5 6.6C20.3 5.6 22.5 3 25.5 3 29.5 3 33 9 33 15.5c0 3.4-1.6 5.5-4.2 5.5-2.7 0-4.4-2.4-7.4-7.8L18 9.6l-3.4 5.6C11.6 20.6 9.9 21 7.2 21 4.6 21 3 18.9 3 15.5Z" stroke="#4C8BF5" strokeWidth="2.6" strokeLinejoin="round"/></svg>
+      </div>
+      <div style={box} title="Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#E1306C" strokeWidth="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>
+      </div>
+      <div style={box} title="WhatsApp">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#25D366" strokeWidth="2" strokeLinejoin="round"><path d="M3.5 20.5l1.3-4.2A8.5 8.5 0 1 1 8 19.4l-4.5 1.1Z"/><path d="M9 8.5c0 3 2.5 6.5 6.5 6.5l1-1.5-2-1-1 .8c-1-.5-2-1.5-2.4-2.4l.8-1-1-2L9 8.5Z" fill="#25D366" stroke="none"/></svg>
+      </div>
+    </div>
+  );
+}
 
-  const [inFormSection, setInFormSection] = useState(false);
-  useEffect(() => {
-    const el = document.getElementById("agendamiento");
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => setInFormSection(entry.isIntersecting),
-      { threshold: 0.05 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+// ─── VSL CON CAPÍTULOS ────────────────────────────────────────
+function Vsl() {
+  const fmt = t => `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`;
+  const seek = t => {
+    const p = document.querySelector(`wistia-player[media-id='${VSL_ID}']`);
+    if (!p) return;
+    try { p.currentTime = t; p.play(); } catch {}
+  };
+  return (
+    <div style={{ maxWidth: 820, margin: "0 auto" }}>
+      <div style={{ borderRadius: 14, overflow: "hidden", border: `1px solid ${borderGold}`, background: bgCard, boxShadow: "0 30px 90px rgba(230,184,74,0.10)" }}>
+        <style dangerouslySetInnerHTML={{ __html: `wistia-player[media-id='${VSL_ID}']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/${VSL_ID}/swatch');display:block;filter:blur(5px);padding-top:56.25%;}` }} />
+        <wistia-player media-id={VSL_ID} aspect="1.7777777777777777"></wistia-player>
+      </div>
+      {SHOW_CHAPTERS && (
+        <div className="chapters" style={{ display: "flex", flexWrap: "wrap", gap: 8, justifyContent: "center", marginTop: 16 }}>
+          {VSL_CHAPTERS.map(c => (
+            <button key={c.t} onClick={() => seek(c.t)} className="chapter" style={{
+              display: "inline-flex", gap: 8, alignItems: "center", padding: "7px 13px", borderRadius: 100,
+              border: `1px solid ${border}`, background: bgCard, color: textSecondary, font: "500 12.5px 'DM Sans', sans-serif", cursor: "pointer",
+            }}>
+              <span style={{ color: gold, fontVariantNumeric: "tabular-nums" }}>{fmt(c.t)}</span>{c.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
 
+// ─── FORMULARIO GHL ───────────────────────────────────────────
+function BookingForm() {
   const [iframeHeight, setIframeHeight] = useState(1450);
-  const iframeWrapperRef = useRef(null);
-
   useEffect(() => {
     function handleMessage(e) {
       if (!e.data) return;
@@ -842,368 +789,396 @@ export default function VenusLanding() {
           h = d.height || d.iframeHeight || null;
         }
       } catch {}
-      if (h && typeof h === "number" && h > 200) {
-        setIframeHeight(Math.ceil(h) + 40);
-      }
+      if (h && typeof h === "number" && h > 200) setIframeHeight(Math.ceil(h) + 40);
     }
     window.addEventListener("message", handleMessage);
     return () => window.removeEventListener("message", handleMessage);
   }, []);
+  return (
+    <div style={{ maxWidth: 700, margin: "0 auto", borderRadius: 14, border: `1px solid ${borderGold}`, overflow: "hidden", background: "#fff" }}>
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/booking/iTVoesZKSVACl7dKzEfe"
+        style={{ width: "100%", height: iframeHeight, border: "none", display: "block" }}
+        scrolling="no"
+        id="iTVoesZKSVACl7dKzEfe_venus"
+        title="Agendamiento Venus Performance"
+      />
+    </div>
+  );
+}
+
+// ─── CARRUSEL DE DOCTORES ─────────────────────────────────────
+function DoctorCard({ d }) {
+  return (
+    <div style={{ width: 190, height: 250, flexShrink: 0, borderRadius: 16, overflow: "hidden", position: "relative", background: bgCard, border: `1px solid ${border}` }}>
+      {d.img
+        ? <img src={d.img} alt={d.name} loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+        : <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center", background: "radial-gradient(circle at 50% 35%, rgba(230,184,74,0.18), transparent 65%)" }}>
+            <span style={{ font: "600 64px 'Outfit', sans-serif", color: gold, opacity: 0.8 }}>{d.name.replace(/^Dra?\. /, "").charAt(0)}</span>
+          </div>}
+      <div style={{ position: "absolute", inset: "auto 0 0 0", padding: "40px 14px 14px", background: "linear-gradient(transparent, rgba(0,0,0,0.88))" }}>
+        <p style={{ font: "600 9.5px 'DM Sans', sans-serif", letterSpacing: "0.14em", textTransform: "uppercase", color: gold, marginBottom: 4 }}>{d.spec}</p>
+        <p style={{ font: "600 14.5px 'Outfit', sans-serif", color: "#fff", lineHeight: 1.2 }}>{d.name}</p>
+        <p style={{ font: "400 11.5px 'DM Sans', sans-serif", color: "rgba(255,255,255,0.65)", marginTop: 2 }}>{d.loc}</p>
+      </div>
+    </div>
+  );
+}
+
+function DoctorMarquee() {
+  const row = [...doctors, ...doctors];
+  return (
+    <div style={{ overflow: "hidden", maskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)", WebkitMaskImage: "linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent)" }}>
+      <div className="marquee" style={{ display: "flex", gap: 14, width: "max-content" }}>
+        {row.map((d, i) => <DoctorCard key={i} d={d} />)}
+      </div>
+    </div>
+  );
+}
+
+// ─── PRUEBA: CONECTOR ENTRE ACTOS ─────────────────────────────
+function ActTitle({ children }) {
+  return (
+    <div style={{ textAlign: "center", padding: "72px 0 40px" }}>
+      <div style={{ width: 1, height: 56, background: `linear-gradient(transparent, ${gold})`, margin: "0 auto" }} />
+      <div style={{ width: 11, height: 11, borderRadius: "50%", background: gold, margin: "0 auto 28px", boxShadow: `0 0 0 6px ${goldDim}` }} />
+      <h2 style={{ ...h2, fontWeight: 500, color: textSecondary, maxWidth: 640, margin: "0 auto" }}>{children}</h2>
+    </div>
+  );
+}
+
+function AdLoop({ a }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    const io = new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }, { threshold: 0.2 });
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <div style={{ borderRadius: 14, overflow: "hidden", border: `1px solid ${border}`, background: bgCard, aspectRatio: "9 / 16" }}>
+      <video ref={ref} src={a.src} poster={a.poster} muted loop playsInline preload="none" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+    </div>
+  );
+}
+
+
+function CaseCard({ c }) {
+  return (
+    <div style={{ background: bgCard, borderRadius: 16, border: `1px solid ${border}`, padding: "24px 24px 22px", position: "relative", overflow: "hidden" }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12, marginBottom: 20 }}>
+        <div>
+          <p style={{ font: "600 19px 'Outfit', sans-serif", color: textPrimary }}>{c.name}</p>
+          <p style={{ font: "400 13px 'DM Sans', sans-serif", color: textMuted, marginTop: 3 }}>{c.sub}</p>
+        </div>
+        <span style={{ padding: "6px 12px", borderRadius: 100, background: "rgba(47,191,113,0.12)", color: "#3ccf82", font: "700 13px 'Outfit', sans-serif", whiteSpace: "nowrap" }}>ROI {roi(c.inv, c.cer)}</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "flex-end", gap: 14, flexWrap: "wrap" }}>
+        <div>
+          <p style={{ font: "500 10.5px 'DM Sans', sans-serif", letterSpacing: "0.12em", textTransform: "uppercase", color: textMuted, marginBottom: 6 }}>Invirtió en anuncios</p>
+          <p style={{ font: "600 22px 'Outfit', sans-serif", color: textSecondary }}>{c.cur}{clp(c.inv)}</p>
+        </div>
+        <span style={{ color: gold, font: "400 22px 'Outfit', sans-serif", paddingBottom: 2 }}>→</span>
+        <div>
+          <p style={{ font: "500 10.5px 'DM Sans', sans-serif", letterSpacing: "0.12em", textTransform: "uppercase", color: textMuted, marginBottom: 6 }}>Cerró en tratamientos</p>
+          <p style={{ font: "700 28px 'Outfit', sans-serif", color: gold, letterSpacing: "-0.01em" }}>{c.cur}{clp(c.cer)}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ─── CÓMO FUNCIONA: 4 PASOS CON LÍNEA ─────────────────────────
+function StepVisual({ kind }) {
+  const card = { background: bgCard, border: `1px solid ${border}`, borderRadius: 14, padding: 18, width: "100%", maxWidth: 360 };
+  const mini = { font: "500 12.5px 'DM Sans', sans-serif" };
+  if (kind === "ads") {
+    const a = adLoops[6] || adLoops[0];
+    if (a) return <div style={{ width: 170 }}><AdLoop a={a} /></div>;
+    return (
+      <div style={card}>
+        {["Guion escrito por Venus", "Edición con subtítulos", "Campaña lanzada en Meta"].map((t, i) => (
+          <div key={i} style={{ display: "flex", gap: 10, alignItems: "center", padding: "9px 0", borderTop: i ? `1px solid ${border}` : "none" }}>
+            <span style={{ width: 20, height: 20, borderRadius: "50%", background: gold, color: "#080808", font: "800 11px/20px 'Outfit'", textAlign: "center" }}>✓</span>
+            <span style={{ ...mini, color: textSecondary }}>{t}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  if (kind === "chat") {
+    const b = (t, me) => <div style={{ alignSelf: me ? "flex-end" : "flex-start", maxWidth: "82%", padding: "8px 12px", borderRadius: 12, background: me ? "#1f5c3a" : "#1c1c1c", color: "#eee", ...mini, lineHeight: 1.4 }}>{t}</div>;
+    return (
+      <div style={{ ...card, display: "flex", flexDirection: "column", gap: 8 }}>
+        <p style={{ ...mini, color: "#25D366", marginBottom: 4 }}>● WhatsApp · 23:41</p>
+        {b("Hola, ¿cuánto sale un implante?", false)}
+        {b("¡Hola! Depende de tu caso. ¿Te agendo una evaluación? Tengo mañana a las 10:30 o el jueves a las 17:00.", true)}
+        {b("Mañana 10:30", false)}
+        {b("Listo, quedaste agendado ✓", true)}
+      </div>
+    );
+  }
+  if (kind === "agenda") {
+    return (
+      <div style={card}>
+        {[["Juan P.", "No asistió", "#e05555"], ["Juan P.", "Reagendado · jueves 17:00", gold], ["Juan P.", "Asistió ✓", "#3ccf82"]].map(([n, s, c], i) => (
+          <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "10px 0", borderTop: i ? `1px solid ${border}` : "none" }}>
+            <span style={{ ...mini, color: textSecondary }}>{n}</span><span style={{ ...mini, color: c }}>{s}</span>
+          </div>
+        ))}
+      </div>
+    );
+  }
+  return (
+    <div style={card}>
+      <p style={{ ...mini, color: gold, marginBottom: 10 }}>Informe de fin de mes</p>
+      {[["Asistieron", "29"], ["Cerraron", "14"], ["Para llamar", "15"]].map(([k, v], i) => (
+        <div key={i} style={{ display: "flex", justifyContent: "space-between", padding: "9px 0", borderTop: `1px solid ${border}` }}>
+          <span style={{ ...mini, color: textSecondary }}>{k}</span><span style={{ font: "600 15px 'Outfit'", color: textPrimary }}>{v}</span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function StepsTimeline() {
+  const ref = useRef(null);
+  const [p, setP] = useState(0);
+  useEffect(() => {
+    const on = () => {
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      setP(Math.max(0, Math.min(1, (innerHeight * 0.6 - r.top) / r.height)));
+    };
+    on();
+    addEventListener("scroll", on, { passive: true });
+    return () => removeEventListener("scroll", on);
+  }, []);
+  return (
+    <div ref={ref} style={{ position: "relative", paddingLeft: 44 }}>
+      <div style={{ position: "absolute", left: 11, top: 8, bottom: 8, width: 2, background: "#1c1c1c" }} />
+      <div style={{ position: "absolute", left: 11, top: 8, width: 2, height: `calc(${p * 100}% - 16px)`, background: gold, transition: "height 0.1s linear" }} />
+      {steps.map((s, i) => {
+        const on = p > (i + 0.15) / steps.length;
+        return (
+          <div key={i} className="step-row" style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 36, alignItems: "center", padding: "36px 0" }}>
+            <div style={{ position: "absolute", left: -44, top: 40, width: 24, height: 24, borderRadius: "50%", background: on ? gold : "#1c1c1c", color: on ? "#080808" : textMuted, font: "700 10px/24px 'Outfit'", textAlign: "center", transition: "all .3s" }}>{s.n}</div>
+            <div>
+              <p style={{ font: "600 10.5px 'DM Sans', sans-serif", letterSpacing: "0.18em", color: gold, marginBottom: 10 }}>PASO {s.n}</p>
+              <h3 style={{ font: "600 clamp(22px, 2.6vw, 28px)/1.15 'Outfit', sans-serif", color: textPrimary, marginBottom: 12 }}>{s.title}</h3>
+              <p style={{ fontSize: 15.5, color: textSecondary, lineHeight: 1.65 }}>{s.desc}</p>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}><StepVisual kind={s.visual} /></div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// ─── PARA TI / NO ES PARA TI ──────────────────────────────────
+function FitCard({ item, i, ok }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <div style={{
+      borderRadius: 16, padding: "22px 22px 18px", height: "100%", display: "flex", flexDirection: "column",
+      background: ok ? bgCard : "#0b0b0b", border: `1px solid ${ok ? borderGold : border}`,
+    }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+        <span style={{ width: 28, height: 28, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", font: "700 13px 'Outfit'", background: ok ? gold : "transparent", color: ok ? "#080808" : textMuted, border: ok ? "none" : `1px solid #333` }}>{ok ? "✓" : "✕"}</span>
+        <span style={{ font: "500 11px 'DM Sans'", color: textMuted }}>0{i + 1}</span>
+      </div>
+      <p className="fit-t" style={{ fontSize: 16, lineHeight: 1.5, color: ok ? textPrimary : textSecondary, flex: 1 }}>{item.t}</p>
+      <button onClick={() => setOpen(!open)} aria-expanded={open} style={{ marginTop: 16, alignSelf: "flex-start", background: "none", border: "none", cursor: "pointer", font: "600 12.5px 'DM Sans', sans-serif", color: ok ? gold : textMuted, display: "inline-flex", gap: 6, alignItems: "center", padding: 0 }}>
+        ¿Por qué? <span style={{ display: "inline-block", transform: open ? "rotate(45deg)" : "none", transition: "transform .2s" }}>+</span>
+      </button>
+      <div style={{ display: "grid", gridTemplateRows: open ? "1fr" : "0fr", transition: "grid-template-rows 0.28s ease" }}>
+        <div style={{ overflow: "hidden" }}>
+          <p style={{ fontSize: 13.5, lineHeight: 1.6, color: textSecondary, paddingTop: 10 }}>{item.why}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function FitGroup({ label, items, ok }) {
+  return (
+    <div style={{ marginTop: 40 }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 18 }}>
+        <span style={{ width: 7, height: 7, borderRadius: "50%", background: ok ? gold : "#444" }} />
+        <span style={{ font: "600 12px 'DM Sans', sans-serif", letterSpacing: "0.18em", color: ok ? gold : textMuted }}>{label}</span>
+        <span style={{ flex: 1, height: 1, background: border }} />
+      </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
+        {items.map((it, i) => <FadeItem key={i} delay={i * 0.07}><FitCard item={it} i={i} ok={ok} /></FadeItem>)}
+      </div>
+    </div>
+  );
+}
+
+// ─── PÁGINA ───────────────────────────────────────────────────
+export default function VenusLanding() {
+  const [floatVisible, setFloatVisible] = useState(false);
+  const [inFormSection, setInFormSection] = useState(true);
+
+  useEffect(() => {
+    const on = () => setFloatVisible(scrollY > 600);
+    on();
+    addEventListener("scroll", on, { passive: true });
+    return () => removeEventListener("scroll", on);
+  }, []);
+
+  useEffect(() => {
+    const el = document.getElementById("agendamiento");
+    if (!el) return;
+    const obs = new IntersectionObserver(([entry]) => setInFormSection(entry.isIntersecting), { threshold: 0.05 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
 
   return (
     <div style={{ background: bg, color: textPrimary, fontFamily: "'DM Sans', sans-serif", minHeight: "100vh", overflowX: "hidden" }}>
-      <div ref={sentinelRef} style={{ position: "absolute", top: 500, height: 1, pointerEvents: "none" }} />
       <GlassFilterDef />
       <style>{`
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         ::selection { background: rgba(230,184,74,0.2); color: #F0EDE6; }
-
-        /* Gold shimmer keyframe (decorative line) */
-        @keyframes shimmer {
-          0%   { transform: translateX(-100%); }
-          100% { transform: translateX(400%); }
+        b { color: ${textPrimary}; font-weight: 600; }
+        #agendamiento { scroll-margin-top: 80px; }
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseGold { 0%, 100% { box-shadow: 0 0 0 0 rgba(230,184,74,0.25); } 50% { box-shadow: 0 0 0 8px rgba(230,184,74,0); } }
+        @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+        @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+        .marquee { animation: marquee 45s linear infinite; }
+        .marquee:hover { animation-play-state: paused; }
+        .chapter:hover { border-color: ${borderGold} !important; color: ${textPrimary} !important; }
+        @media (max-width: 720px) {
+          .step-row { grid-template-columns: 1fr !important; gap: 22px !important; }
+          .grid-ads { grid-template-columns: repeat(2, 1fr) !important; }
+          .grid-ads > :nth-child(n+7) { display: none; }
+          .nav-full { display: none; }
+          .nav-short { display: inline !important; }
+          .nav-brand { font-size: 12px !important; letter-spacing: 0.1em !important; white-space: nowrap; }
+          .chapters { flex-wrap: nowrap !important; justify-content: flex-start !important; overflow-x: auto; margin-left: -20px; margin-right: -20px; padding: 0 20px 4px; scrollbar-width: none; }
+          .chapters::-webkit-scrollbar { display: none; }
+          .chapter { flex-shrink: 0; white-space: nowrap; }
         }
-        @keyframes fadeSlideUp {
-          from { opacity: 0; transform: translateY(16px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes pulseGold {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(230,184,74,0.25); }
-          50%       { box-shadow: 0 0 0 8px rgba(230,184,74,0); }
-        }
-
-        .feat-card:hover { border-color: rgba(230,184,74,0.3) !important; background: #0E0E0E !important; }
-        .feat-card:hover .feat-icon { opacity: 1 !important; }
-
-
-        .treat-card:hover { border-color: rgba(230,184,74,0.3) !important; }
-        .treat-card:hover .treat-icon { transform: scale(1.1) rotate(-3deg); }
-        .treat-icon { transition: transform 0.3s ease; }
-
-        .client-cell:hover { background: #0E0E0E !important; }
+        @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
       `}</style>
 
-      {/* FAB */}
-      <FloatingCTA onClick={scrollTo} visible={floatVisible && !inFormSection} />
+      <FloatingCTA onClick={scrollToForm} visible={floatVisible && !inFormSection} />
 
-      {/* ══ BEAMS — cubre toda la página ═════════════════════ */}
-      <BeamsHero>
-
-      {/* ══ NAV ══════════════════════════════════════════════ */}
-      <nav style={{
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "24px 32px", maxWidth: 960, margin: "0 auto",
-        borderBottom: `1px solid rgba(30,30,30,0.6)`,
-        animation: "fadeSlideUp 0.5s ease both",
-      }}>
-        <span style={{ fontSize: 15, fontWeight: 600, color: textPrimary, letterSpacing: "0.14em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif" }}>
-          VENUS <span style={{ color: gold }}>PERFORMANCE</span>
-        </span>
-        <Btn onClick={scrollTo} style={{ padding: "11px 26px", fontSize: 13 }}>
-          Agendar diagnóstico
-        </Btn>
+      {/* ══ BARRA FIJA ═══════════════════════════════════════ */}
+      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, background: "rgba(8,8,8,0.78)", backdropFilter: "blur(14px)", WebkitBackdropFilter: "blur(14px)", borderBottom: `1px solid ${border}` }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "14px 24px", maxWidth: 1080, margin: "0 auto" }}>
+          <span className="nav-brand" style={{ fontSize: 14, fontWeight: 600, color: textPrimary, letterSpacing: "0.14em", textTransform: "uppercase" }}>
+            VENUS <span style={{ color: gold }}>PERFORMANCE</span>
+          </span>
+          <Btn onClick={scrollToForm} style={{ padding: "10px 22px", fontSize: 13, whiteSpace: "nowrap" }}>
+            <span className="nav-full">Agendar diagnóstico</span><span className="nav-short" style={{ display: "none" }}>Agendar</span>
+          </Btn>
+        </div>
+        <ScrollProgress />
       </nav>
 
-      {/* ══ HERO ═════════════════════════════════════════════ */}
-      <section style={{ padding: "120px 24px 100px", maxWidth: 920, margin: "0 auto" }}>
-        <div style={{ animation: "fadeSlideUp 0.6s ease 0.1s both" }}>
-          <div style={{
-            display: "inline-flex", alignItems: "center", gap: 8,
-            padding: "5px 14px", border: `1px solid ${borderGold}`, borderRadius: 1, marginBottom: 48,
-          }}>
-            <div style={{ width: 5, height: 5, borderRadius: "50%", background: gold, animation: "pulseGold 2.5s ease infinite" }} />
-            <span style={{ fontSize: 11, color: gold, fontWeight: 500, letterSpacing: "0.18em", textTransform: "uppercase", fontFamily: "'DM Sans', sans-serif" }}>
-              Solo para clínicas dentales
-            </span>
-          </div>
-        </div>
+      <BeamsHero>
 
-        <div style={{ animation: "fadeSlideUp 0.65s ease 0.2s both" }}>
-          <h1 style={{
-            fontSize: "clamp(36px, 5.5vw, 62px)",
-            fontWeight: 700, lineHeight: 1.06, color: textPrimary,
-            maxWidth: 760, marginBottom: 32,
-            fontFamily: "'Outfit', sans-serif", letterSpacing: "-0.025em",
-          }}>
-            Un buen dentista no piensa en marketing.{" "}
-            <span style={{ color: gold }}>
-              Tiene un sistema que piensa por él.
-            </span>
-          </h1>
+      {/* ══ PORTADA + VSL ════════════════════════════════════ */}
+      <section style={{ padding: "140px 20px 40px", maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
+        <div style={{ animation: "fadeSlideUp 0.6s ease 0.05s both" }}>
+          <PlatformLogos />
         </div>
-
-        <div style={{ animation: "fadeSlideUp 0.65s ease 0.32s both" }}>
-          <p style={{ fontSize: 17, color: textSecondary, maxWidth: 520, marginBottom: 10, lineHeight: 1.65 }}>
-            Instalamos el Motor de Agenda 14/30 en tu clínica. Tu agenda se llena de pacientes de alto ticket. Tú no tocas el marketing.
-          </p>
-          <p style={{ fontSize: 14, color: textMuted, maxWidth: 440, marginBottom: 48, lineHeight: 1.5 }}>
-            14 días de instalación. Primeros resultados en 30.
-          </p>
-        </div>
-
-        <div style={{ animation: "fadeSlideUp 0.65s ease 0.42s both" }}>
-          {/* VSL — Wistia */}
-          <div style={{
-            maxWidth: 680, marginBottom: 48,
-            borderRadius: 3,
-            border: `1px solid ${border}`,
-            overflow: "hidden",
-            background: bgCard,
-          }}>
-            <style dangerouslySetInnerHTML={{ __html: `wistia-player[media-id='du5mc2z1pq']:not(:defined){background:center/contain no-repeat url('https://fast.wistia.com/embed/medias/du5mc2z1pq/swatch');display:block;filter:blur(5px);padding-top:56.25%;}` }} />
-            <wistia-player media-id="du5mc2z1pq" aspect="1.7777777777777777"></wistia-player>
-          </div>
-        </div>
-
-        <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", animation: "fadeSlideUp 0.65s ease 0.5s both" }}>
-          <Btn onClick={scrollTo} style={{ fontSize: 15, padding: "16px 44px" }}>
-            Agenda tu diagnóstico gratuito
-          </Btn>
-          <p style={{ fontSize: 13, color: textMuted }}>45 minutos. Sin compromiso. Sin costo.</p>
+        <h1 style={{
+          fontSize: "clamp(34px, 5.4vw, 64px)", fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.025em",
+          fontFamily: "'Outfit', sans-serif", maxWidth: 900, margin: "0 auto 26px", animation: "fadeSlideUp 0.65s ease 0.15s both",
+        }}>
+          Un buen dentista no piensa en marketing.{" "}
+          <span style={{ color: gold }}>En 15 días tiene un sistema que piensa por él.</span>
+        </h1>
+        <p style={{ fontSize: "clamp(16px, 1.6vw, 18.5px)", color: textSecondary, maxWidth: 640, margin: "0 auto 44px", lineHeight: 1.6, animation: "fadeSlideUp 0.65s ease 0.25s both" }}>
+          Anuncios grabados por ti, un asistente de IA que responde y agenda por WhatsApp a cualquier hora y seguimiento hasta que asisten. Sin depender del boca a boca ni de promociones. Los primeros pacientes suelen llegar <b>dentro de 30 días</b>. Hoy lo usan <b>15 clínicas en Chile y Brasil</b>.
+        </p>
+        <div style={{ animation: "fadeSlideUp 0.65s ease 0.35s both" }}>
+          <Vsl />
         </div>
       </section>
 
-      {/* ══ QUÉ HACEMOS ══════════════════════════════════════ */}
-      <Section>
-        <Label text="Qué hacemos" />
-        <GoldRule />
-        <h2 style={{ fontSize: "clamp(26px, 3.5vw, 38px)", fontWeight: 600, marginBottom: 20, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          No somos una agencia que "te hace los ads"
-        </h2>
-        <p style={{ fontSize: 16, color: textSecondary, lineHeight: 1.7, marginBottom: 10, maxWidth: 600 }}>
-          Te instalamos un sistema completo de captación de pacientes que funciona mientras tú operas. Se llama <strong style={{ color: gold }}>Motor de Agenda 14/30</strong>.
+      {/* ══ FORMULARIO ═══════════════════════════════════════ */}
+      <section id="agendamiento" style={{ padding: "30px 20px 90px", maxWidth: 1000, margin: "0 auto", textAlign: "center" }}>
+        <p style={{ font: "600 15px 'DM Sans', sans-serif", color: gold, marginBottom: 10 }}>
+          Ve si calificas <span style={{ display: "inline-block", animation: "bob 1.6s ease infinite" }}>↓</span>
         </p>
-        <p style={{ fontSize: 16, color: textSecondary, lineHeight: 1.7, marginBottom: 48, maxWidth: 600 }}>
-          14 días de instalación. Resultados reales en 30. Así de simple.
+        <h2 style={{ ...h2, fontSize: "clamp(24px, 3vw, 34px)", marginBottom: 10 }}>Agenda tu diagnóstico gratuito</h2>
+        <p style={{ fontSize: 14.5, color: textMuted, marginBottom: 30 }}>45 minutos · Sin compromiso · Sin costo</p>
+        <BookingForm />
+      </section>
+
+      {/* ══ CLÍNICAS ═════════════════════════════════════════ */}
+      <section style={{ padding: "70px 0 0" }}>
+        <h2 style={{ ...h2, fontWeight: 500, textAlign: "center", maxWidth: 720, margin: "0 auto 40px", padding: "0 20px" }}>
+          Trabajamos con clínicas dentales <span style={{ color: gold }}>de Chile y Brasil</span>,
+        </h2>
+        <DoctorMarquee />
+      </section>
+
+      {/* ══ PRUEBA EN TRES ACTOS ═════════════════════════════ */}
+      <section style={{ padding: "0 20px 40px", maxWidth: 1000, margin: "0 auto" }}>
+        {adLoops.length > 0 && (
+          <>
+            <ActTitle>creando anuncios <span style={{ color: gold }}>como estos</span>,</ActTitle>
+            <div className="grid-ads" style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(3, adLoops.length)}, 1fr)`, gap: 12, maxWidth: 760, margin: "0 auto" }}>
+              {adLoops.map((a, i) => <FadeItem key={i} delay={(i % 3) * 0.08}><AdLoop a={a} /></FadeItem>)}
+            </div>
+          </>
+        )}
+        {adLoops.length
+          ? <ActTitle>que terminan en <span style={{ color: gold }}>tratamientos cerrados</span> como estos.</ActTitle>
+          : <ActTitle>con <span style={{ color: gold }}>resultados</span> como estos.</ActTitle>}
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: 16, maxWidth: 860, margin: "0 auto" }}>
+          {cases.map((c, i) => <FadeItem key={i} delay={(i % 2) * 0.08}><CaseCard c={c} /></FadeItem>)}
+        </div>
+        <p style={{ textAlign: "center", fontSize: 12.5, color: textMuted, marginTop: 18 }}>
+          Casos reales. ROI = lo que cerró la clínica ÷ lo que invirtió en anuncios. Cada clínica es distinta.
         </p>
+      </section>
 
-        {/* 4 feature cards con íconos */}
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(210px, 1fr))",
-          gap: 1,
-          background: border,
-          border: `1px solid ${border}`,
-          borderRadius: 3,
-          overflow: "hidden",
-        }}>
-          {[
-            { Icon: IconAds,  title: "Meta Ads (bien hechos)",  desc: "Sin métricas de vanidad. Solo métricas de dinero." },
-            { Icon: IconBot,  title: "Bot de IA en WhatsApp",   desc: "Entrenado con AIDA y SPIN. Responde, califica y agenda. 24/7." },
-            { Icon: IconCRM,  title: "CRM y Pipeline",          desc: "Tu flujo de pacientes organizado y visible. Sin Excel." },
-            { Icon: IconSync, title: "Dentalink sync",          desc: "Las citas aparecen directo en tu agenda. Si no tienes agenda digital, te la instalamos." },
-            { Icon: IconLanding, title: "Landing page",         desc: "Diseñada y escrita por nosotros. Hecha para convertir al visitante en paciente." },
-          ].map(({ Icon, title, desc }, i) => (
-            <FadeItem key={i} delay={i * 0.08}>
-              <div
-                className="feat-card"
-                style={{
-                  padding: "32px 24px",
-                  background: bgCard,
-                  transition: "background 0.2s ease, border-color 0.2s ease",
-                  height: "100%",
-                  border: "1px solid transparent",
-                }}
-              >
-                <div className="feat-icon" style={{ marginBottom: 20, opacity: 0.75, transition: "opacity 0.2s" }}>
-                  <Icon />
-                </div>
-                <div style={{ width: 20, height: 1, background: gold, marginBottom: 16, opacity: 0.5 }} />
-                <h4 style={{ fontSize: 16, fontWeight: 600, color: textPrimary, marginBottom: 8, fontFamily: "'Outfit', sans-serif" }}>
-                  {title}
-                </h4>
-                <p style={{ fontSize: 13, color: textSecondary, lineHeight: 1.6 }}>{desc}</p>
-              </div>
-            </FadeItem>
-          ))}
-        </div>
-      </Section>
-
-      {/* ══ CHECKLIST ════════════════════════════════════════ */}
-      <Section>
-        <Label text="Diagnóstico rápido" />
-        <GoldRule />
-        <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 8, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          ¿Tu clínica tiene alguno de estos síntomas?
+      {/* ══ CÓMO FUNCIONA ════════════════════════════════════ */}
+      <Section style={{ maxWidth: 1000 }}>
+        <h2 style={{ ...h2, maxWidth: 680, marginBottom: 18 }}>
+          Para lograr esto no solo "hacemos anuncios". <span style={{ color: gold }}>Instalamos un sistema.</span>
         </h2>
-        <p style={{ fontSize: 15, color: textSecondary, marginBottom: 32 }}>Marca los que te identifiquen.</p>
-        <Checklist />
-      </Section>
-
-      {/* ══ TRATAMIENTOS ═════════════════════════════════════ */}
-      <Section>
-        <Label text="Especialidades" />
-        <GoldRule />
-        <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 6, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          No hacemos de todo.
-        </h2>
-        <p style={{ fontSize: "clamp(20px, 2.5vw, 28px)", color: gold, fontWeight: 600, marginBottom: 44, fontFamily: "'Outfit', sans-serif" }}>
-          Hacemos lo rentable.
+        <p style={{ fontSize: 16.5, color: textSecondary, lineHeight: 1.65, maxWidth: 600, marginBottom: 30 }}>
+          Cada pieza resuelve un hoyo por donde hoy se te escapan pacientes: desde que ven tu anuncio hasta que pagan el tratamiento.
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 12 }}>
-          {treatments.map((t, i) => (
-            <FadeItem key={i} delay={i * 0.09}>
-              <div
-                className="treat-card"
-                style={{
-                  padding: "28px 22px",
-                  background: bgCard,
-                  borderRadius: 3,
-                  border: `1px solid ${border}`,
-                  transition: "border-color 0.25s ease",
-                  height: "100%",
-                }}
-              >
-                <div className="treat-icon" style={{ marginBottom: 16, opacity: 0.85 }}>
-                  <t.Icon />
-                </div>
-                <h4 style={{ fontSize: 15, fontWeight: 600, color: textPrimary, marginBottom: 8, fontFamily: "'Outfit', sans-serif", lineHeight: 1.3 }}>
-                  {t.name}
-                </h4>
-                <p style={{ fontSize: 13, color: textSecondary, lineHeight: 1.55 }}>{t.desc}</p>
-              </div>
-            </FadeItem>
-          ))}
-        </div>
+        <StepsTimeline />
       </Section>
 
-      {/* ══ TIMELINE ═════════════════════════════════════════ */}
-      <Section>
-        <Label text="Cómo funciona" />
-        <GoldRule />
-        <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 44, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          De cero a <span style={{ color: gold }}>agenda llena</span> en 30 días
-        </h2>
-        <Timeline />
-      </Section>
-
-      {/* ══ COSTO DE OPORTUNIDAD ═════════════════════════════ */}
-      <Section style={{ textAlign: "center" }}>
-        <Label text="Los números" />
-        <div style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: "0 auto 32px" }} />
-        <h2 style={{ fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 600, marginBottom: 12, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif"  }}>
-          ¿Cuánto dinero estás dejando en la calle?
-        </h2>
-        <p style={{ fontSize: 16, color: textSecondary, maxWidth: 500, margin: "0 auto 40px", lineHeight: 1.65 }}>
-          Haz la cuenta con tu propio ticket. Cada paciente que no te encontró, que no recibió respuesta a tiempo o que no volvió a escribir, terminó sentado en otra clínica.
-        </p>
-        <div style={{ maxWidth: 480, margin: "0 auto 28px", textAlign: "left" }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-            {[
-              { left: "Un paciente de implantes que no llegó",   right: "$800.000 CLP" },
-              { left: "Un paciente de carillas que no llegó",    right: "$700.000 CLP" },
-              { left: "3 pacientes de implantes al mes",         right: "$2.400.000 CLP" },
-              { left: "Ese mismo mes, repetido todo un año",     right: "$28.800.000 CLP" },
-            ].map((row, i) => (
-              <FadeItem key={i} delay={i * 0.08}>
-                <div style={{
-                  display: "flex", justifyContent: "space-between", alignItems: "center",
-                  padding: "14px 20px", background: bgCard, borderRadius: 2, border: `1px solid ${border}`,
-                }}>
-                  <span style={{ fontSize: 14, color: textSecondary }}>{row.left}</span>
-                  <span style={{ fontSize: 15, fontWeight: 600, color: gold, fontFamily: "'Outfit', sans-serif" }}>{row.right}</span>
-                </div>
-              </FadeItem>
-            ))}
-          </div>
-        </div>
-        <div style={{
-          padding: "28px 32px", background: goldDim, borderRadius: 3, border: `1px solid ${borderGold}`,
-          maxWidth: 520, margin: "0 auto", textAlign: "left",
-        }}>
-          <p style={{ fontSize: 17, color: textPrimary, lineHeight: 1.7, marginBottom: 12 }}>
-            Tres pacientes de implantes al mes que se van a la competencia son <strong style={{ color: gold }}>$28.800.000 CLP al año</strong> que nunca entraron a tu caja.
-          </p>
-          <p style={{ fontSize: 14, color: textSecondary, lineHeight: 1.6, margin: 0 }}>
-            Esa plata no aparece en ninguna planilla, porque es facturación que jamás existió. El sillón vacío y el arriendo del mes sí aparecen.
-          </p>
-        </div>
-      </Section>
-
-      {/* ══ CLIENTES ═════════════════════════════════════════ */}
-      <Section>
-        <Label text="Clínicas que trabajan con Venus" />
-        <GoldRule />
-        <div style={{
-          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-          gap: 1, background: border, border: `1px solid ${border}`, borderRadius: 3, overflow: "hidden",
-        }}>
-          {clients.map((c, i) => (
-            <FadeItem key={i} delay={i * 0.06}>
-              <div
-                className="client-cell"
-                style={{ padding: "22px 18px", background: bgCard, textAlign: "center", transition: "background 0.2s ease", height: "100%" }}
-              >
-                <div style={{
-                  width: 32, height: 32, borderRadius: "50%", background: goldDim,
-                  display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px",
-                }}>
-                  <span style={{ fontSize: 13, fontWeight: 600, color: gold, fontFamily: "'Outfit', sans-serif" }}>
-                    {c.name.charAt(0)}
-                  </span>
-                </div>
-                <p style={{ fontSize: 13, fontWeight: 500, color: textPrimary, marginBottom: 3 }}>{c.name}</p>
-                <p style={{ fontSize: 11, color: textMuted }}>{c.loc}</p>
-              </div>
-            </FadeItem>
-          ))}
-        </div>
-      </Section>
-
-      {/* ══ 100% DENTAL ══════════════════════════════════════ */}
-      <Section style={{ textAlign: "center" }}>
-        <h2 style={{
-          fontSize: "clamp(22px, 3vw, 34px)", fontWeight: 500, lineHeight: 1.2,
-          fontFamily: "'Outfit', sans-serif", maxWidth: 640, margin: "0 auto 18px",
-        }}>
-          Solo trabajamos con clínicas dentales.{" "}
-          <span style={{ color: gold }}>Nunca aceptamos otro tipo de cliente.</span>
-        </h2>
-        <p style={{ fontSize: 15, color: textSecondary, maxWidth: 480, margin: "0 auto", lineHeight: 1.7 }}>
-          No hacemos marketing para restaurantes, no hacemos ecommerce, no hacemos "de todo un poco". Solo clínicas dentales. Eso nos permite entender tu paciente, tu mercado y tu negocio como nadie más.
-        </p>
+      {/* ══ PARA TI / NO ES PARA TI ══════════════════════════ */}
+      <Section style={{ maxWidth: 1000 }}>
+        <h2 style={{ ...h2, maxWidth: 680, marginBottom: 14 }}>¿Para quién es Venus, y para quién no?</h2>
+        <p style={{ fontSize: 16, color: textSecondary }}>Esto no funciona con cualquier clínica. Lee las dos listas antes de agendar.</p>
+        <FitGroup label="PARA TI" items={forYou} ok />
+        <FitGroup label="NO ES PARA TI" items={notForYou} />
       </Section>
 
       {/* ══ CTA FINAL ════════════════════════════════════════ */}
-      <Section id="agendamiento" style={{ textAlign: "center", paddingBottom: 60 }}>
-        <Label text="Empieza hoy" />
-        <div style={{ width: 36, height: 1, background: `linear-gradient(90deg, transparent, ${gold}, transparent)`, margin: "0 auto 32px" }} />
-        <h2 style={{
-          fontSize: "clamp(26px, 3.5vw, 44px)", fontWeight: 500, lineHeight: 1.1,
-          fontFamily: "'Outfit', sans-serif", maxWidth: 580, margin: "0 auto 18px",
-        }}>
-          Agenda tu diagnóstico gratuito
+      <section style={{ padding: "110px 20px", textAlign: "center", background: "radial-gradient(ellipse at 50% 40%, rgba(230,184,74,0.10), transparent 60%)" }}>
+        <h2 style={{ ...h2, fontSize: "clamp(32px, 5vw, 56px)", maxWidth: 760, margin: "0 auto 18px" }}>
+          Agenda tu <span style={{ color: gold }}>diagnóstico gratuito</span>.
         </h2>
-        <p style={{ fontSize: 16, color: textSecondary, maxWidth: 460, margin: "0 auto 40px", lineHeight: 1.65 }}>
-          45 minutos donde analizamos tu situación actual y te mostramos exactamente cómo el Motor de Agenda 14/30 funciona para tu clínica.
+        <p style={{ fontSize: 16, color: textSecondary, maxWidth: 520, margin: "0 auto 36px", lineHeight: 1.65 }}>
+          45 minutos para revisar tu clínica. Si vemos que no te podemos ayudar, te lo decimos.
         </p>
-        {/* GHL Widget */}
-        <div ref={iframeWrapperRef} style={{
-          maxWidth: 700, margin: "0 auto 32px",
-          borderRadius: 3, border: `1px solid ${border}`,
-          overflow: "hidden", background: "#fff",
-        }}>
-          <iframe
-            src="https://api.leadconnectorhq.com/widget/booking/iTVoesZKSVACl7dKzEfe"
-            style={{ width: "100%", height: iframeHeight, border: "none", display: "block" }}
-            scrolling="no"
-            id="iTVoesZKSVACl7dKzEfe_venus"
-            title="Agendamiento Venus Performance"
-          />
-        </div>
-        <p style={{ fontSize: 13, color: textMuted, letterSpacing: "0.04em" }}>
-          Sin compromiso · Sin costo · Sin letra chica
-        </p>
-      </Section>
+        <Btn onClick={scrollToForm} style={{ fontSize: 15, padding: "16px 44px" }}>Agendar diagnóstico ↑</Btn>
+      </section>
 
       {/* ══ FAQ ══════════════════════════════════════════════ */}
-      <Section>
-        <Label text="Preguntas frecuentes" />
+      <Section style={{ maxWidth: 760 }}>
+        <Label text="Lo que siempre nos preguntan" />
         <GoldRule />
-        <h2 style={{ fontSize: "clamp(24px, 3vw, 34px)", fontWeight: 600, marginBottom: 32, lineHeight: 1.15, fontFamily: "'Outfit', sans-serif" }}>
-          Lo que todo dentista nos pregunta antes de empezar
-        </h2>
+        <h2 style={{ ...h2, fontSize: "clamp(24px, 3vw, 34px)", marginBottom: 32 }}>Antes de agendar</h2>
         <Faq />
       </Section>
 
@@ -1211,7 +1186,7 @@ export default function VenusLanding() {
       <footer style={{
         padding: "28px 32px 100px", borderTop: `1px solid ${border}`,
         display: "flex", justifyContent: "space-between", alignItems: "center",
-        flexWrap: "wrap", gap: 12, maxWidth: 960, margin: "0 auto",
+        flexWrap: "wrap", gap: 12, maxWidth: 1000, margin: "0 auto",
       }}>
         <span style={{ fontSize: 13, fontWeight: 500, color: textMuted, letterSpacing: "0.12em", textTransform: "uppercase" }}>
           VENUS <span style={{ color: gold }}>PERFORMANCE</span>

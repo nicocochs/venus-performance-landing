@@ -65,7 +65,7 @@ export default function RootLayout({ children }) {
           strategy="afterInteractive"
         />
         <Script
-          src="https://fast.wistia.com/embed/du5mc2z1pq.js"
+          src="https://fast.wistia.com/embed/c46nin7kuw.js"
           strategy="afterInteractive"
           type="module"
         />
