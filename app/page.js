@@ -287,7 +287,6 @@ const adLoops = [
   { src: "/ads/tus-ronquido.mp4", poster: "/ads/tus-ronquido.webp" },
   { src: "/ads/clinica-es-vaso.mp4", poster: "/ads/clinica-es-vaso.webp" },
   { src: "/ads/privilege-desiste.mp4", poster: "/ads/privilege-desiste.webp" },
-  { src: "/ads/og-implantes-presupuesto.mp4", poster: "/ads/og-implantes-presupuesto.webp" },
 ];
 
 
@@ -1135,7 +1134,7 @@ export default function VenusLanding() {
         {adLoops.length > 0 && (
           <>
             <ActTitle>Creamos anuncios <span style={{ color: gold }}>como estos</span>,</ActTitle>
-            <div className="grid-ads" style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(3, adLoops.length)}, 1fr)`, gap: 12, maxWidth: 760, margin: "0 auto" }}>
+            <div className="grid-ads" style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(4, adLoops.length)}, 1fr)`, gap: 12, maxWidth: 920, margin: "0 auto" }}>
               {adLoops.map((a, i) => <FadeItem key={i} delay={(i % 3) * 0.08}><AdLoop a={a} /></FadeItem>)}
             </div>
           </>
