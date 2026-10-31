@@ -1125,7 +1125,7 @@ export default function VenusLanding() {
       {/* ══ CLÍNICAS ═════════════════════════════════════════ */}
       <section style={{ padding: "70px 0 0" }}>
         <h2 style={{ ...h2, fontWeight: 500, textAlign: "center", maxWidth: 720, margin: "0 auto 40px", padding: "0 20px" }}>
-          Trabajamos con clínicas dentales <span style={{ color: gold }}>de Chile y Brasil</span>,
+          Algunos de <span style={{ color: gold }}>nuestros clientes</span>:
         </h2>
         <DoctorMarquee />
       </section>
@@ -1134,7 +1134,7 @@ export default function VenusLanding() {
       <section style={{ padding: "0 20px 40px", maxWidth: 1000, margin: "0 auto" }}>
         {adLoops.length > 0 && (
           <>
-            <ActTitle>creando anuncios <span style={{ color: gold }}>como estos</span>,</ActTitle>
+            <ActTitle>Creamos anuncios <span style={{ color: gold }}>como estos</span>,</ActTitle>
             <div className="grid-ads" style={{ display: "grid", gridTemplateColumns: `repeat(${Math.min(3, adLoops.length)}, 1fr)`, gap: 12, maxWidth: 760, margin: "0 auto" }}>
               {adLoops.map((a, i) => <FadeItem key={i} delay={(i % 3) * 0.08}><AdLoop a={a} /></FadeItem>)}
             </div>
